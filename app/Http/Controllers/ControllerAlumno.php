@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\validar;
 use App\Http\Requests\ValidaAlumno;
+use App\Models\Administrador;
 use App\Models\Alumno;
+use App\Models\Docente;
+use App\Models\Secretaria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +18,7 @@ class ControllerAlumno extends Controller
     {
 
 
-
+        //Selecciona la infoormacion del alumno a editar para despues mandarla a nueva ventana
         $selecalumno = Alumno::where('ID_ALUMNO', $id)->get();
 
 
@@ -27,15 +31,11 @@ class ControllerAlumno extends Controller
     {
 
 
-        $selecalum = Alumno::select(
-            'ID_ALUMNO',
-            'ALUMNO_APELLIDO_PAT',
-            'ALUMNO_APELLIDO_MAT',
-            'ALUMNO_NOMBRE',
-            'ALUMNO_SEXO',
-            'ALUMNO_FECHA_NAC'
-        )
-            ->get();
+        // Consultamos la informacion del alumno para llenar en la Tabla
+
+        $selecalum = DB::table('alumnos')
+            ->join('users',  'users.id', '=', 'alumnos.ALUMNO_CORREO')
+            ->select('users.*', 'alumnos.*')->get();
 
 
 
@@ -48,108 +48,173 @@ class ControllerAlumno extends Controller
 
 
 
+        $validar = new validar();
+
+        //Condicion de mensaje para informar sin el Id ya esta registrada en otro usuario
+        if ($validar->idal($informacion) > 0) {
+
+            session()->flash('errorid', 'El ID ingresado ya Existe');
+            return back();
+        } else {
+
+            //Condicion de mensaje para informar si el Correo ya esta registrado en otro usuario
+            if ($validar->emailal($informacion) > 0) {
+                session()->flash('erroremail', 'El Correo Electronico ingresado ya esta registrado a un usuario');
+                return back();
+            } else {
+                //Sino Entra a la condicion de Agregar
 
 
-
-        DB::insert(
-            'INSERT INTO `alumnos` (
+                DB::insert(
+                    'INSERT INTO `alumnos` (
             `ID_ALUMNO`, `ALUMNO_APELLIDO_PAT`, `ALUMNO_APELLIDO_MAT`, `ALUMNO_NOMBRE`, `ALUMNO_SEXO`, `ALUMNO_TIPO_SANGRE`, 
             `ALUMNO_FECHA_NAC`, `ALUMNO_CALLE`, `ALUMNO_COLONIA`, `ALUMNO_MUNICIPIO`, `ALUMNO_ESTADO`, `ALUMNO_TELEFONO_PER`, 
             `ALUMNO_TELEFONO_CASA`, `ALUMNO_CORREO`, `ALUMNO_TUTOR_AR_PAT`, `ALUMNO_TUTOR_AR_MAT`, `ALUMNO_TUTOR_NOMBRE`, `ALUMNO_CARRERA`,
-             `ALUMNO_FECHA_ING`, `ALUMNO_OBSERVACIONES`, `ALUMNO_PWD`, `ALU_STA`, `ALU_ING_PER`, `ALU_ING_AN`, `ALU_INS`, `ALU_FIN_PER`, `ALU_SEM`,
-              `ALU_FIN_AN`, `ALU_MOT_BAJ`, `ALU_PER_BAJ`, `ALU_AN_BAJ`) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)',
-            [
-                $informacion->ID_ALUMNO,
-                $informacion->ALUMNO_APELLIDO_PAT,
-                $informacion->ALUMNO_APELLIDO_MAT,
-                $informacion->ALUMNO_NOMBRE,
-                $informacion->ALUMNO_SEXO,
-                $informacion->ALUMNO_TIPO_SANGRE,
-                $informacion->ALUMNO_FECHA_NAC,
-                $informacion->ALUMNO_CALLE,
-                $informacion->ALUMNO_COLONIA,
-                $informacion->ALUMNO_MUNICIPIO,
-                $informacion->ALUMNO_ESTADO,
-                $informacion->ALUMNO_TELEFONO_PER,
-                $informacion->ALUMNO_TELEFONO_CASA,
-                $informacion->ALUMNO_CORREO,
-                $informacion->ALUMNO_TUTOR_AR_PAT,
-                $informacion->ALUMNO_TUTOR_AR_MAT,
-                $informacion->ALUMNO_TUTOR_NOMBRE,
-                $informacion->ALUMNO_CARRERA,
-                $informacion->ALUMNO_FECHA_ING,
-                $informacion->ALUMNO_OBSERVACIONES,
-                $informacion->ALUMNO_PWD,
-                $informacion->ALU_STA,
-                $informacion->ALU_ING_PER,
-                $informacion->ALU_ING_AN,
-                $informacion->ALU_INS,
-                $informacion->ALU_FIN_PER,
-                $informacion->ALU_SEM,
-                $informacion->ALU_FIN_AN,
-                $informacion->ALU_MOT_BAJ,
-                $informacion->ALU_PER_BAJ,
-                $informacion->ALU_AN_BAJ
+            `ALUMNO_OBSERVACIONES`, `ALUMNO_STATUS`,`ALUMNO_ING_ANIO` ) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                    [
+                        $informacion->ID_ALUMNO,
+                        $informacion->ALUMNO_APELLIDO_PAT,
+                        $informacion->ALUMNO_APELLIDO_MAT,
+                        $informacion->ALUMNO_NOMBRE,
+                        $informacion->ALUMNO_SEXO,
+                        $informacion->ALUMNO_TIPO_SANGRE,
+                        $informacion->ALUMNO_FECHA_NAC,
+                        $informacion->ALUMNO_CALLE,
+                        $informacion->ALUMNO_COLONIA,
+                        $informacion->ALUMNO_MUNICIPIO,
+                        $informacion->ALUMNO_ESTADO,
+                        $informacion->ALUMNO_TELEFONO_PER,
+                        $informacion->ALUMNO_TELEFONO_CASA,
+                        $informacion->ALUMNO_CORREO,
+                        $informacion->ALUMNO_TUTOR_AR_PAT,
+                        $informacion->ALUMNO_TUTOR_AR_MAT,
+                        $informacion->ALUMNO_TUTOR_NOMBRE,
+                        $informacion->ALUMNO_CARRERA,
+                        $informacion->ALUMNO_OBSERVACIONES,
+                        $informacion->ALUMNO_STATUS,
 
-            ]
-        );
+                        $informacion->ALUMNO_ING_ANIO
 
 
 
-        return  back();
+                    ]
+                );
+
+
+
+                return  back();
+            }
+        }
     }
+
+
 
     public function modificaralumno(Request $informacion, $id)
 
     {
 
 
+        //Validamos que los campos sean correctos
+        $informacion->validate([
 
-        $selecalum = DB::table('alumnos')->where('ID_ALUMNO', $id)->update([
 
 
 
-            'ID_ALUMNO' => $id,
-            'ALUMNO_APELLIDO_PAT' => $informacion->ALUMNO_APELLIDO_PAT,
-            'ALUMNO_APELLIDO_MAT' => $informacion->ALUMNO_APELLIDO_MAT,
-            'ALUMNO_NOMBRE' => $informacion->ALUMNO_NOMBRE,
-            'ALUMNO_SEXO' => $informacion->ALUMNO_SEXO,
-            'ALUMNO_TIPO_SANGRE' => $informacion->ALUMNO_TIPO_SANGRE,
-            'ALUMNO_FECHA_NAC' => $informacion->ALUMNO_FECHA_NAC,
-            'ALUMNO_CALLE' => $informacion->ALUMNO_CALLE,
-            'ALUMNO_COLONIA' => $informacion->ALUMNO_COLONIA,
-            'ALUMNO_MUNICIPIO' => $informacion->ALUMNO_MUNICIPIO,
-            'ALUMNO_ESTADO' => $informacion->ALUMNO_ESTADO,
-            'ALUMNO_TELEFONO_PER' => $informacion->ALUMNO_TELEFONO_PER,
-            'ALUMNO_TELEFONO_CASA' => $informacion->ALUMNO_TELEFONO_CASA,
-            'ALUMNO_CORREO' => $informacion->ALUMNO_CORREO,
-            'ALUMNO_TUTOR_AR_PAT' => $informacion->ALUMNO_TUTOR_AR_PAT,
-            'ALUMNO_TUTOR_AR_MAT' => $informacion->ALUMNO_TUTOR_AR_MAT,
-            'ALUMNO_TUTOR_NOMBRE' => $informacion->ALUMNO_TUTOR_NOMBRE,
-            'ALUMNO_CARRERA' => $informacion->ALUMNO_CARRERA,
-            'ALUMNO_FECHA_ING' => $informacion->ALUMNO_FECHA_ING,
-            'ALUMNO_OBSERVACIONES' => $informacion->ALUMNO_OBSERVACIONES,
-            'ALU_STA' => $informacion->ALU_STA,
-            'ALU_ING_PER' => $informacion->ALU_ING_PER,
-            'ALU_ING_AN' => $informacion->ALU_ING_AN,
-            'ALU_INS' => $informacion->ALU_INS,
-            'ALU_FIN_PER' => $informacion->ALU_FIN_PER,
-            'ALU_SEM' => $informacion->ALU_SEM,
-            'ALU_FIN_AN' => $informacion->ALU_FIN_AN,
-            'ALU_MOT_BAJ' => $informacion->ALU_MOT_BAJ,
-            'ALU_PER_BAJ' => $informacion->ALU_PER_BAJ,
-            'ALU_AN_BAJ' => $informacion->ALU_AN_BAJ,
+            'ALUMNO_APELLIDO_PAT' => 'required|max:30',
+            'ALUMNO_APELLIDO_MAT' => 'max:30',
+            'ALUMNO_NOMBRE' => 'required|max:30',
+            'ALUMNO_SEXO' => 'required',
+            'ALUMNO_TIPO_SANGRE' => 'max:5',
+            'ALUMNO_FECHA_NAC' => 'required|date',
+            'ALUMNO_CALLE' => 'required|max:30',
+            'ALUMNO_COLONIA' => 'required|max:30',
+            'ALUMNO_MUNICIPIO' => 'required|max:30',
+            'ALUMNO_ESTADO' => 'required|max:30',
 
+            'ALUMNO_CARRERA' => 'required|max:30',
+            'ALUMNO_OBSERVACIONES' => 'max:500',
+            'ALUMNO_STATUS' => 'required|max:20',
+            'ALUMNO_ING_ANIO' => 'required|min:1',
         ]);
 
 
 
 
+        if ($informacion->ID_ALUMNO == $id) {
+            $selecalum = DB::table('alumnos')->where('ID_ALUMNO', $id)->update([
 
 
-        return redirect()->route('alumno.actualizado');
+
+                'ID_ALUMNO' => $id,
+                'ALUMNO_APELLIDO_PAT' => $informacion->ALUMNO_APELLIDO_PAT,
+                'ALUMNO_APELLIDO_MAT' => $informacion->ALUMNO_APELLIDO_MAT,
+                'ALUMNO_NOMBRE' => $informacion->ALUMNO_NOMBRE,
+                'ALUMNO_SEXO' => $informacion->ALUMNO_SEXO,
+                'ALUMNO_TIPO_SANGRE' => $informacion->ALUMNO_TIPO_SANGRE,
+                'ALUMNO_FECHA_NAC' => $informacion->ALUMNO_FECHA_NAC,
+                'ALUMNO_CALLE' => $informacion->ALUMNO_CALLE,
+                'ALUMNO_COLONIA' => $informacion->ALUMNO_COLONIA,
+                'ALUMNO_MUNICIPIO' => $informacion->ALUMNO_MUNICIPIO,
+                'ALUMNO_ESTADO' => $informacion->ALUMNO_ESTADO,
+                'ALUMNO_TELEFONO_PER' => $informacion->ALUMNO_TELEFONO_PER,
+                'ALUMNO_TELEFONO_CASA' => $informacion->ALUMNO_TELEFONO_CASA,
+
+                'ALUMNO_TUTOR_AR_PAT' => $informacion->ALUMNO_TUTOR_AR_PAT,
+                'ALUMNO_TUTOR_AR_MAT' => $informacion->ALUMNO_TUTOR_AR_MAT,
+                'ALUMNO_TUTOR_NOMBRE' => $informacion->ALUMNO_TUTOR_NOMBRE,
+                'ALUMNO_CARRERA' => $informacion->ALUMNO_CARRERA,
+                'ALUMNO_OBSERVACIONES' => $informacion->ALUMNO_OBSERVACIONES,
+                'ALUMNO_STATUS' => $informacion->ALUMNO_STATUS,
+                'ALUMNO_ING_ANIO' => $informacion->ALUMNO_ING_ANIO,
+
+
+
+
+            ]);
+
+            return redirect()->route('alumno.actualizado');
+        } else {
+            $validar = new validar();
+            //validamos si el id esta en la base de datos
+            if ($validar->idal($informacion) > 0) {
+                session()->flash('errorid', 'El ID ingresado ya Existe');
+                return back();
+            } else {
+                $selecalum = DB::table('alumnos')->where('ID_ALUMNO', $id)->update([
+
+
+
+                    'ID_ALUMNO' => $informacion->ID_ALUMNO,
+                    'ALUMNO_APELLIDO_PAT' => $informacion->ALUMNO_APELLIDO_PAT,
+                    'ALUMNO_APELLIDO_MAT' => $informacion->ALUMNO_APELLIDO_MAT,
+                    'ALUMNO_NOMBRE' => $informacion->ALUMNO_NOMBRE,
+                    'ALUMNO_SEXO' => $informacion->ALUMNO_SEXO,
+                    'ALUMNO_TIPO_SANGRE' => $informacion->ALUMNO_TIPO_SANGRE,
+                    'ALUMNO_FECHA_NAC' => $informacion->ALUMNO_FECHA_NAC,
+                    'ALUMNO_CALLE' => $informacion->ALUMNO_CALLE,
+                    'ALUMNO_COLONIA' => $informacion->ALUMNO_COLONIA,
+                    'ALUMNO_MUNICIPIO' => $informacion->ALUMNO_MUNICIPIO,
+                    'ALUMNO_ESTADO' => $informacion->ALUMNO_ESTADO,
+                    'ALUMNO_TELEFONO_PER' => $informacion->ALUMNO_TELEFONO_PER,
+                    'ALUMNO_TELEFONO_CASA' => $informacion->ALUMNO_TELEFONO_CASA,
+
+                    'ALUMNO_TUTOR_AR_PAT' => $informacion->ALUMNO_TUTOR_AR_PAT,
+                    'ALUMNO_TUTOR_AR_MAT' => $informacion->ALUMNO_TUTOR_AR_MAT,
+                    'ALUMNO_TUTOR_NOMBRE' => $informacion->ALUMNO_TUTOR_NOMBRE,
+                    'ALUMNO_CARRERA' => $informacion->ALUMNO_CARRERA,
+                    'ALUMNO_OBSERVACIONES' => $informacion->ALUMNO_OBSERVACIONES,
+                    'ALUMNO_STATUS' => $informacion->ALUMNO_STATUS,
+                    'ALUMNO_ING_ANIO' => $informacion->ALUMNO_ING_ANIO,
+
+
+
+
+                ]);
+            }
+        }
     }
+
 
 
     public function eliminaralumno($id)

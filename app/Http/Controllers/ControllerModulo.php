@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidaModulo;
 use App\Models\Modulo;
+use App\Models\Planestudio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,16 +14,18 @@ class ControllerModulo extends Controller
     public function agregamodulo(ValidaModulo $informacion)
     {
 
+        $var = $informacion->MODULO_ID_PLANESTUDIO . '_M' .  $informacion->MODULO_NIVEL;
+
         DB::insert(
 
-            'INSERT INTO `modulos` (`ID_MODULO`, `MODULO_TIEMPO`, `RET_NOM`, `RET_ORD`)
-             VALUES (?,?,?,?)',
+            'INSERT INTO `modulos` (`ID_MODULO`, `RETICULA_NOMBRE`, `MODULO_ID_PLANESTUDIO` )
+             VALUES (?,?,?)',
             [
 
-                $informacion->ID_MODULO,
-                $informacion->MODULO_TIEMPO,
-                $informacion->RET_NOM,
-                $informacion->RET_ORD
+                $var,
+                $informacion->RETICULA_NOMBRE,
+                $informacion->MODULO_ID_PLANESTUDIO,
+
 
             ]
         );
@@ -37,13 +40,16 @@ class ControllerModulo extends Controller
         $selecmodulo = Modulo::select(
 
             'ID_MODULO',
-            'MODULO_TIEMPO',
-            'RET_NOM',
-            'RET_ORD',
+            'RETICULA_NOMBRE',
+            'MODULO_ID_PLANESTUDIO',
+
         )->get();
+        //llenar combo con los planes
+
+        $selecplan = Planestudio::select('ID_PLANESTUDIO')->get();
 
 
-        return view('modulo', compact('selecmodulo'));
+        return view('modulo', compact('selecmodulo', 'selecplan'));
     }
 
 
@@ -54,10 +60,10 @@ class ControllerModulo extends Controller
 
 
         $selecmodulo = Modulo::where('ID_MODULO', $id)->get();
+        $selecplan = Planestudio::select('ID_PLANESTUDIO')->get();
 
 
-
-        return view('update/modulo', compact('selecmodulo'));
+        return view('update/modulo', compact('selecmodulo', 'selecplan'));
     }
 
 

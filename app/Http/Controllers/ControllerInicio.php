@@ -10,6 +10,28 @@ class ControllerInicio extends Controller
     {
 
 
-        return view('welcome');
+        return view('auth/login');
+    }
+
+
+    public function cardex()
+    {
+
+
+        return view('/cardex2');
+    }
+
+    public function calificacion2()
+    {
+
+
+        return view('/calificacion2');
+    }
+
+    public function docentecalif()
+    {
+
+
+        return view('/docente-calif');
     }
 }

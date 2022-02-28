@@ -28,11 +28,11 @@ class ValidaPlan extends FormRequest
 
             'ID_PLANESTUDIO' => 'required|max:30',
             'PLAN_CLAVE' => 'required|max:30',
-            'PLAN_ID_IDIOMA' => 'required',
-            'PLAN_IN' => 'required|max:30',
-            'PLAN_FIN' => 'required|max:30',
-            'PLAN_ESTADO' => 'required|max:30',
-            'PLAN_CMOD' => 'required|max:30'
+            'PLAN_ID_IDIOMA' => 'required|max:20',
+            'PLAN_IN' => 'required|date',
+            'PLAN_FIN' => 'required|date',
+            'PLAN_ESTADO' => 'required|max:10',
+            'PLAN_CMOD' => 'required|min:1'
 
         ];
     }

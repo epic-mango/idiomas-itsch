@@ -3,6 +3,39 @@
 
 @section('contenido-main')
 
+
+<!-- Mensaje de alerta de id -->
+<div class="container">
+    @if(Session::get('errorid'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Alerta!</h4>
+        <p>{{ Session::get('errorid') }}</p>
+
+
+    </div>
+    @endif
+
+</div>
+
+<!-- Mensaje de alerta de Email -->
+<div class="container">
+    @if(Session::get('erroremail'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Alerta!</h4>
+        <p>{{ Session::get('erroremail') }}</p>
+
+
+    </div>
+    @endif
+
+</div>
+
 <!--Cuadro a Salir para Modificar Docente-->
 
 
@@ -26,7 +59,7 @@
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">ID:</label>
                                 <input type="text" name="ID_DOCENTE" value="{{ $informacion->ID_DOCENTE }}"
-                                    pattern="[A-Zz-a]{1,30}" class="form-control form-control-sm" maxlength="30"
+                                    pattern="[A-Zz-a]{1,6}" class="form-control form-control-sm" maxlength="6"
                                     placeholder="ID" required disabled>
                                 {!! $errors->first('ID_DOCENTE','<span class="alert-danger">:message</span><br>')
                                 !!}
@@ -70,7 +103,7 @@
                                 <label for="exampleFormControlInput1">Materno:</label>
                                 <input type="text" name="DOCENTE_AP_MAT" value="{{ $informacion->DOCENTE_AP_MAT }}"
                                     class="form-control form-control-sm" pattern="[a-zZ-A]{1,30}" maxlength="30"
-                                    placeholder="Apellido Materno" required>
+                                    placeholder="Apellido Materno">
                                 {!! $errors->first('DOCENTE_AP_MAT','<span class="alert-danger">:message</span><br>')
                                 !!}
                             </div>
@@ -108,6 +141,8 @@
                                     <option>AB-</option>
                                     <option>O+</option>
                                     <option>O-</option>
+                                    <option>No Sabe
+                                    <option>
 
                                 </select>
                             </div>
@@ -219,7 +254,7 @@
                                     <label for="exampleFormControlInput1">Telefono Celular:</label>
                                     <input type="tel" class="form-control form-control-sm" pattern="[0-9]{1,30}"
                                         maxlength="30" name="DOCENTE_MOVIL" value="{{ $informacion->DOCENTE_MOVIL }}"
-                                        placeholder="Telefono Celular" required>
+                                        placeholder="Telefono Celular">
                                     {!! $errors->first('DOCENTE_MOVIL','<span class="alert-danger">:message</span><br>')
                                     !!}
                                 </div>
@@ -237,9 +272,9 @@
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Email address</label>
-                                    <input maxlength="30" type="email" class="form-control" name="DOCENTE_CORREO"
+                                    <input maxlength="30" type="text" class="form-control" name="DOCENTE_CORREO"
                                         value="{{ $informacion->DOCENTE_CORREO }}" id="exampleFormControlInput1"
-                                        placeholder="name@example.com" required>
+                                        placeholder="name@example.com" disabled>
                                     {!! $errors->first('DOCENTE_CORREO','<span
                                         class="alert-danger">:message</span><br>')
                                     !!}
@@ -255,10 +290,20 @@
                         <div class="col-sm">
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Clave Profesional:</label>
-                                <input type="text" class="form-control form-control-sm" name="DOCENTE_CLAVE_PROFESIONAL"
-                                    value="{{ $informacion->DOCENTE_CLAVE_PROFESIONAL }}" maxlength="30"
-                                    placeholder="Clave Profesional" required>
-                                {!! $errors->first('DOCENTE_CLAVE_PROFESIONAL','<span
+                                <select class="form-control  form-control-sm" name="DOCENTE_GRADO_ESCOLAR"
+                                    id="exampleFormControlSelect1">
+
+
+                                    <option>{{ $informacion->DOCENTE_GRADO_ESCOLAR }}</option>
+                                    <option>Primaria</option>
+                                    <option>Secundaria</option>
+                                    <option>Media Superior</option>
+                                    <option>Superior</option>
+                                    <option>Maestria</option>
+                                    <option>Doctorado</option>
+
+                                </select>
+                                {!! $errors->first('DOCENTE_GRADO_ESCOLAR','<span
                                     class="alert-danger">:message</span><br>')
                                 !!}
                             </div>
@@ -268,7 +313,7 @@
                                 <label for="exampleFormControlInput1">Especialidad:</label>
                                 <input type="text" class="form-control form-control-sm" name="DOCENTE_ESPECIALIDAD"
                                     value="{{ $informacion->DOCENTE_ESPECIALIDAD }}" pattern="[a-zZ-A]{1,30}"
-                                    maxlength="30" placeholder="Especialidad" required>
+                                    maxlength="30" placeholder="Especialidad">
                                 {!! $errors->first('DOCENTE_ESPECIALIDAD','<span
                                     class="alert-danger">:message</span><br>')
                                 !!}
@@ -281,16 +326,7 @@
 
                         </div>
 
-                        <div class="col-sm">
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">CAT_EPR:</label>
-                                <input type="text" class="form-control form-control-sm" name="CAT_EPR"
-                                    value="{{ $informacion->CAT_EPR }}" pattern="[a-zZ-A]{1,15}" maxlength="15"
-                                    placeholder="Especialidad" required>
-                                {!! $errors->first('CAT_EPR','<span class="alert-danger">:message</span><br>')
-                                !!}
-                            </div>
-                        </div>
+
 
                     </div>
 

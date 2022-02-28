@@ -25,10 +25,11 @@ class ValidaModulo extends FormRequest
     {
         return [
 
-            'ID_MODULO' => 'required|max:30',
-            'MODULO_TIEMPO' => 'required|min:1|numeric',
-            'RET_NOM' => 'required|max:5',
-            'RET_ORD' => 'required|min:1|numeric',
+
+
+            'RETICULA_NOMBRE' => 'required|max:5',
+            'MODULO_ID_PLANESTUDIO' => 'required|max:5',
+            'MODULO_NIVEL' =>    'required|min:1',
             //
         ];
     }

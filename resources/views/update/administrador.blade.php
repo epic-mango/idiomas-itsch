@@ -4,7 +4,37 @@
 @section('contenido-main')
 
 
+<!-- Mensaje de alerta de id -->
+<div class="container">
+    @if(Session::get('errorid'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Alerta!</h4>
+        <p>{{ Session::get('errorid') }}</p>
 
+
+    </div>
+    @endif
+
+</div>
+
+<!-- Mensaje de alerta de Email -->
+<div class="container">
+    @if(Session::get('erroremail'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Alerta!</h4>
+        <p>{{ Session::get('erroremail') }}</p>
+
+
+    </div>
+    @endif
+
+</div>
 
 <!--Cuadro a Salir para Modificar admin-->
 
@@ -29,8 +59,8 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">ID:</label>
                                     <input type="text" name="ID_ADMIN" value="{{ $informacion->ID_ADMIN }}"
-                                        pattern="[A-Zz-a]{1,30}" class="form-control form-control-sm" maxlength="30"
-                                        placeholder="ID" required disabled>
+                                        pattern="[A-Zz-a]{1,10}" class="form-control form-control-sm" maxlength="10"
+                                        placeholder="ID" disabled>
                                     {!! $errors->first('ID_ADMIN','<span class="alert-danger">:message</span><br>')
                                     !!}
                                 </div>
@@ -112,6 +142,8 @@
                                         <option>AB-</option>
                                         <option>O+</option>
                                         <option>O-</option>
+                                        <option>No Sabe
+                                        <option>
 
                                     </select>
                                 </div>
@@ -167,7 +199,7 @@
                                     <label for="exampleFormControlSelect1">Estado:</label>
                                     <select class="form-control form-control-sm" name="ADMIN_ESTADO"
                                         id="exampleFormControlSelect1">
-                                        <option>{{  $informacion->ADMIN_ESTADO }}</option>
+                                        <option>{{ $informacion->ADMIN_ESTADO }}</option>
                                         <option value="Aguascalientes">Aguascalientes</option>
                                         <option value="Baja California">Baja California</option>
                                         <option value="Baja California Sur">Baja California Sur</option>
@@ -223,7 +255,7 @@
                                         <label for="exampleFormControlInput1">Telefono Celular:</label>
                                         <input type="tel" class="form-control form-control-sm" pattern="[0-9]{1,30}"
                                             maxlength="30" name="ADMIN_MOVIL" value="{{ $informacion->ADMIN_MOVIL }}"
-                                            placeholder="Telefono Celular" required>
+                                            placeholder="Telefono Celular">
                                         {!! $errors->first('ADMIN_MOVIL','<span
                                             class="alert-danger">:message</span><br>')
                                         !!}
@@ -243,9 +275,9 @@
                                 <div class="col-sm">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Email address</label>
-                                        <input maxlength="30" type="email" class="form-control" name="ADMIN_CORREO"
+                                        <input maxlength="30" type="text" class="form-control" name="ADMIN_CORREO"
                                             value="{{ $informacion->ADMIN_CORREO }}" id="exampleFormControlInput1"
-                                            placeholder="name@example.com" required>
+                                            placeholder="name@example.com" disabled>
                                         {!! $errors->first('ADMIN_CORREO','<span
                                             class="alert-danger">:message</span><br>')
                                         !!}
@@ -266,7 +298,7 @@
                                     <input type="text" class="form-control form-control-sm"
                                         name="ADMIN_CLAVE_PROFESIONAL"
                                         value="{{ $informacion->ADMIN_CLAVE_PROFESIONAL }}" maxlength="30"
-                                        placeholder="Clave Profesional" required>
+                                        placeholder="Clave Profesional">
                                     {!! $errors->first('ADMIN_CLAVE_PROFESIONAL','<span
                                         class="alert-danger">:message</span><br>')
                                     !!}
@@ -277,7 +309,7 @@
                                     <label for="exampleFormControlInput1">Especialidad:</label>
                                     <input type="text" class="form-control form-control-sm" name="ADMIN_ESPECIALIDAD"
                                         value="{{ $informacion->ADMIN_ESPECIALIDAD }}" pattern="[A-Za-z]{1,30}"
-                                        maxlength="30" placeholder="Especialidad" required>
+                                        maxlength="30" placeholder="Especialidad">
                                     {!! $errors->first('ADMIN_ESPECIALIDAD','<span
                                         class="alert-danger">:message</span><br>') !!}
                                 </div>

@@ -2,7 +2,37 @@
 
 
 @section('contenido-main')
+<!-- Mensaje de alerta de id -->
+<div class="container">
+    @if(Session::get('errorid'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Alerta!</h4>
+        <p>{{ Session::get('errorid') }}</p>
 
+
+    </div>
+    @endif
+
+</div>
+
+<!-- Mensaje de alerta de Email -->
+<div class="container">
+    @if(Session::get('erroremail'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Alerta!</h4>
+        <p>{{ Session::get('erroremail') }}</p>
+
+
+    </div>
+    @endif
+
+</div>
 
 <!-- Large modal -->
 <div class="container">
@@ -29,7 +59,7 @@
         <thead class="thead-dark">
             <tr>
 
-                <th>ID Admin</th>
+                <th>Email</th>
                 <th>Nombre</th>
                 <th>Sexo</th>
                 <th>Fecha De Nacimiento</th>
@@ -44,7 +74,7 @@
         <tbody>
             @foreach ($selecadmin as $item)
             <tr>
-                <td>{{ $item->ID_ADMIN  }} </td>
+                <td>{{ $item->email  }} </td>
                 <td>
                     {{ $item->ADMIN_NOMBRE }} {{ $item->ADMIN_AP_PAT }} {{ $item->ADMIN_AP_MAT }}
                 </td>
@@ -124,7 +154,7 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">ID:</label>
                                     <input type="text" name="ID_ADMIN" value="{{ old('ID_ADMIN') }}"
-                                        pattern="[A-Zz-a]{1,30}" class="form-control form-control-sm" maxlength="30"
+                                        pattern="[A-Zz-a]{1,10}" class="form-control form-control-sm" maxlength="10"
                                         placeholder="ID" required>
                                     {!! $errors->first('ID_ADMIN','<span class="alert-danger">:message</span><br>')
                                     !!}
@@ -207,6 +237,8 @@
                                         <option>AB-</option>
                                         <option>O+</option>
                                         <option>O-</option>
+                                        <option>No Sabe
+                                        <option>
 
                                     </select>
                                 </div>
@@ -216,7 +248,7 @@
                                     <label for="exampleFormControlInput1 ">Fecha de Nacimiento:</label>
 
                                     <input class="form-control form-control-sm" name="ADMIN_FECHA_NAC" type="date"
-                                        value="2011-08-19" id="example-date-input">
+                                        value="2011-08-19">
 
                                 </div>
                             </div>
@@ -316,7 +348,7 @@
                                         <label for="exampleFormControlInput1">Telefono Celular:</label>
                                         <input type="tel" class="form-control form-control-sm" pattern="[0-9]{1,30}"
                                             maxlength="30" name="ADMIN_MOVIL" value="{{ old('ADMIN_MOVIL') }}"
-                                            placeholder="Telefono Celular" required>
+                                            placeholder="Telefono Celular">
                                         {!! $errors->first('ADMIN_MOVIL','<span
                                             class="alert-danger">:message</span><br>') !!}
                                     </div>
@@ -334,8 +366,8 @@
                                 <div class="col-sm">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Email address</label>
-                                        <input maxlength="30" type="email" class="form-control" name="ADMIN_CORREO"
-                                            value="{{ old('ADMIN_CORREO') }}" id="exampleFormControlInput1"
+                                        <input maxlength="30" type="" id="buscaremail" class="form-control"
+                                            name="ADMIN_CORREO" value="{{ auth()->user()->id }}"
                                             placeholder="name@example.com" required>
                                         {!! $errors->first('ADMIN_CORREO','<span
                                             class="alert-danger">:message</span><br>') !!}
@@ -355,7 +387,7 @@
                                     <label for="exampleFormControlInput1">Clave Profesional:</label>
                                     <input type="text" class="form-control form-control-sm"
                                         name="ADMIN_CLAVE_PROFESIONAL" value="{{ old('ADMIN_CLAVE_PROFESIONAL') }}"
-                                        maxlength="30" placeholder="Clave Profesional" required>
+                                        maxlength="30" placeholder="Clave Profesional">
                                     {!! $errors->first('ADMIN_CLAVE_PROFESIONAL','<span
                                         class="alert-danger">:message</span><br>')
                                     !!}
@@ -366,35 +398,19 @@
                                     <label for="exampleFormControlInput1">Especialidad:</label>
                                     <input type="text" class="form-control form-control-sm" name="ADMIN_ESPECIALIDAD"
                                         value="{{ old('ADMIN_ESPECIALIDAD') }}" pattern="[A-Za-z]{1,30}" maxlength="30"
-                                        placeholder="Especialidad" required>
+                                        placeholder="Especialidad">
                                     {!! $errors->first('ADMIN_ESPECIALIDAD','<span
                                         class="alert-danger">:message</span><br>') !!}
                                 </div>
                             </div>
                             <div class="col-sm">
-                                <label for="exampleFormControlInput1 ">Ingreso:</label>
+                                <label for="exampleFormControlInput1 ">Fecha de Ingreso:</label>
                                 <input class="form-control form-control-sm" type="date" name="ADMIN_FECHA_ING"
                                     value="2011-08-19" id="example-date-input">
                             </div>
                         </div>
 
-                        <div class="row">
 
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Contrasena</label>
-                                    <input id="password" type="password" class="form-control" name="ADMIN_PWD"
-                                        id="exampleInputPassword1" maxlength="30" placeholder="Password" required>
-                                </div>
-                            </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Confirmar Contrasena</label>
-                                    <input id="confirm_password" type="password" class="form-control"
-                                        id="exampleInputPassword2" maxlength="30" placeholder="Password" required>
-                                </div>
-                            </div>
-                        </div>
 
 
                         <div class="row">

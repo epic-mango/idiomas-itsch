@@ -4,7 +4,37 @@
 
 @section('contenido-main')
 
+<!-- Mensaje de alerta de id -->
+<div class="container">
+    @if(Session::get('errorid'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Alerta!</h4>
+        <p>{{ Session::get('errorid') }}</p>
 
+
+    </div>
+    @endif
+
+</div>
+
+<!-- Mensaje de alerta de Email -->
+<div class="container">
+    @if(Session::get('erroremail'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Alerta!</h4>
+        <p>{{ Session::get('erroremail') }}</p>
+
+
+    </div>
+    @endif
+
+</div>
 
 <!--Cuadro a Salir paraModificar ALumno-->
 
@@ -35,10 +65,10 @@
                     <div class="col-sm">
                         <div class="col-sm">
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Clave:</label>
+                                <label for="exampleFormControlInput1">Matricula:</label>
                                 <input type="text" name="ID_ALUMNO" class="form-control form-control-sm"
-                                    pattern="[A-Zz-a]{1,30}" maxlength="30" placeholder="Clave"
-                                    value="{{ $informacion->ID_ALUMNO }}" required disabled>
+                                    pattern="[A-Zz-a]{1,15}" maxlength="15" placeholder="Clave"
+                                    value="{{ $informacion->ID_ALUMNO }}" required>
                                 {!! $errors->first('ID_ALUMNO','<span class="alert-danger">:message</span><br>')
                                 !!}
 
@@ -111,6 +141,8 @@
                                             <option>AB-</option>
                                             <option>O+</option>
                                             <option>O-</option>
+                                            <option>No Sabe
+                                            <option>
 
                                         </select>
                                     </div>
@@ -232,7 +264,7 @@
                                         <input name="ALUMNO_TELEFONO_PER"
                                             value="{{ $informacion->ALUMNO_TELEFONO_PER }}" type="tel" maxlength="30"
                                             pattern="[0-9]{1,30}" class="form-control form-control-sm"
-                                            placeholder="Telefono Celular" required>
+                                            placeholder="Telefono Celular">
                                         {!! $errors->first('ALUMNO_TELEFONO_PER','<span
                                             class="alert-danger">:message</span><br>') !!}
                                     </div>
@@ -257,15 +289,119 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Email address</label>
                                         <input name="ALUMNO_CORREO" value="{{ $informacion->ALUMNO_CORREO }}"
-                                            type="email" class="form-control" maxlength="30"
-                                            id="exampleFormControlInput1" placeholder="name@example.com" required>
+                                            type="text" class="form-control" maxlength="30"
+                                            id="exampleFormControlInput1" placeholder="name@example.com" disabled>
                                         {!! $errors->first('ALUMNO_CORREO','<span
                                             class="alert-danger">:message</span><br>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Estatus:</label>
+                                        <select name="ALUMNO_STATUS" class="form-control form-control-sm">
+                                            <option>{{ $informacion->ALUMNO_STATUS }}</option>
+                                            <option>Vigente</option>
+                                            <option>Baja Temporal</option>
+                                            <option>Baja Definitiva</option>
+                                            <option>Egreso</option>
+
+
+
+                                        </select>
+                                        {!! $errors->first('ALUMNO_STATUS','<span
+                                            class="alert-danger">:message</span><br>')
+                                        !!}
                                     </div>
                                 </div>
 
                             </div>
 
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Nombre Tutor:</label>
+                                        <input name="ALUMNO_TUTOR_NOMBRE"
+                                            value="{{ $informacion->ALUMNO_TUTOR_NOMBRE }}" type="text"
+                                            pattern="[a-zZ-A]{1,30}" class="form-control form-control-sm"
+                                            placeholder="Nombre Tutor" maxlength="30">
+                                        {!! $errors->first('ALUMNO_TUTOR_NOMBRE','<span
+                                            class="alert-danger">:message</span><br>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Paterno:</label>
+                                        <input name="ALUMNO_TUTOR_AR_PAT"
+                                            value="{{ $informacion->ALUMNO_TUTOR_AR_PAT }}" type="text"
+                                            pattern="[a-zZ-A]{1,30}" class="form-control form-control-sm"
+                                            placeholder="Apellido Paterno Tutor" maxlength="30">
+                                        {!! $errors->first('ALUMNO_TUTOR_AR_PAT','<span
+                                            class="alert-danger">:message</span><br>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Materno:</label>
+                                        <input name="ALUMNO_TUTOR_AR_MAT"
+                                            value="{{ $informacion->ALUMNO_TUTOR_AR_MAT }}" type="text"
+                                            pattern="[a-zZ-A]{1,30}" class="form-control form-control-sm"
+                                            placeholder="Apellido Materno Tutor" maxlength="30">
+                                        {!! $errors->first('ALUMNO_TUTOR_AR_MAT','<span
+                                            class="alert-danger">:message</span><br>') !!}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Carrera:</label>
+                                        <select name="ALUMNO_CARRERA" class="form-control form-control-sm">
+                                            <option>{{ $informacion->ALUMNO_CARRERA}}
+                                            </option>
+                                            <option>Sistemas Computacionales</option>
+                                            <option>Tecnologias de la Informacion</option>
+                                            <option>Industrial</option>
+                                            <option>Mecatronica </option>
+                                            <option>Gestion Empresarial </option>
+                                            <option>Bioquimica </option>
+                                            <option>Nanotecnologia </option>
+                                            <option>Secundaria </option>
+                                            <option>Preparatoria </option>
+
+
+
+                                        </select>
+                                        {!! $errors->first('ALUMNO_CARRERA','<span
+                                            class="alert-danger">:message</span><br>') !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm">
+                                    <div class="form-group ">
+                                        <label for="exampleFormControlInput1 ">Ano de Ingreso:</label>
+
+
+                                        <?php
+                                        $cont = date('Y');
+                                        ?>
+                                        <select name="ALUMNO_ING_ANIO" class="form-control form-control-sm">
+
+                                            <?php while ($cont >= 1999) { ?>
+                                            <option>{{ $informacion->ALUMNO_ING_ANIO }}</option>
+                                            <option value="<?php echo($cont); ?>">
+                                                <?php echo($cont); ?>
+                                            </option>
+                                            <?php $cont = ($cont-1); } ?>
+                                        </select>
+                                        {!! $errors->first('ALUMNO_ING_ANIO','<span
+                                            class="alert-danger">:message</span><br>') !!}
+                                    </div>
+                                </div>
+
+
+                            </div>
 
                             <div class="row">
                                 <div class="col-sm">
@@ -287,219 +423,7 @@
 
                     </div>
 
-                    <!--Columna 2-->
-                    <div class="col-sm">
-                        <div class="col-sm">
 
-
-
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">Nombre:</label>
-                                        <input name="ALUMNO_TUTOR_NOMBRE"
-                                            value="{{ $informacion->ALUMNO_TUTOR_NOMBRE }}" type="text"
-                                            pattern="[a-zZ-A]{1,30}" class="form-control form-control-sm"
-                                            placeholder="Nombre Tutor" maxlength="30" required>
-                                        {!! $errors->first('ALUMNO_TUTOR_NOMBRE','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">Paterno:</label>
-                                        <input name="ALUMNO_TUTOR_AR_PAT"
-                                            value="{{ $informacion->ALUMNO_TUTOR_AR_PAT }}" type="text"
-                                            pattern="[a-zZ-A]{1,30}" class="form-control form-control-sm"
-                                            placeholder="Apellido Paterno Tutor" maxlength="30" required>
-                                        {!! $errors->first('ALUMNO_TUTOR_AR_PAT','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">Materno:</label>
-                                        <input name="ALUMNO_TUTOR_AR_MAT"
-                                            value="{{ $informacion->ALUMNO_TUTOR_AR_MAT }}" type="text"
-                                            pattern="[a-zZ-A]{1,30}" class="form-control form-control-sm"
-                                            placeholder="Apellido Materno Tutor" maxlength="30">
-                                        {!! $errors->first('ALUMNO_TUTOR_AR_MAT','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-
-
-                            <div class="row">
-
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">Carrera:</label>
-                                        <input type="text" name="ALUMNO_CARRERA"
-                                            value="{{ $informacion->ALUMNO_CARRERA }}" pattern="[a-zZ-A]   {1,30}"
-                                            class="form-control form-control-sm" placeholder="Carrera" maxlength="30"
-                                            required>
-                                        {!! $errors->first('ALUMNO_CARRERA','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-sm">
-                                    <div class="form-group ">
-                                        <label for="exampleFormControlInput1 ">Fecha de
-                                            Ingreso:</label>
-
-                                        <input name="ALUMNO_FECHA_ING" class="form-control form-control-sm" type="date"
-                                            value="{{ $informacion->ALUMNO_FECHA_ING }}" id="example-date-input">
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">STA:</label>
-                                        <input type="text" maxlength="2" name="ALU_STA"
-                                            value="{{ $informacion->ALU_STA }}" pattern="[A-Zz-a]{1,2}"
-                                            class="form-control form-control-sm" placeholder="STA" required>
-                                        {!! $errors->first('ALU_STA','<span class="alert-danger">:message</span><br>')
-                                        !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">ING_PER:</label>
-                                        <input type="text" name="ALU_ING_PER" value="{{ $informacion->ALU_ING_PER }}"
-                                            pattern="[A-Zz-a]{1,8}" maxlength="8" class="form-control form-control-sm"
-                                            placeholder="ING_PER" required>
-                                        {!! $errors->first('ALU_ING_PER','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">INS:</label>
-                                        <input type="text" name="ALU_INS" value="{{ $informacion->ALU_INS }}"
-                                            maxlength="1" pattern="[A-Zz-a]{1,1}" class="form-control form-control-sm"
-                                            placeholder="INS" required>
-                                        {!! $errors->first('ALU_INS','<span class="alert-danger">:message</span><br>')
-                                        !!}
-                                    </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">ING_ANT:</label>
-                                        <input type="tel" name="ALU_ING_AN" value="{{ $informacion->ALU_ING_AN }}"
-                                            pattern="[0-9]{1,6}" maxlength="4" class="form-control form-control-sm"
-                                            placeholder="Numeros" required>
-                                        {!! $errors->first('ALU_ING_AN','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row">
-
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">SEM:</label>
-                                        <input type="tel" name="ALU_SEM" value="{{ $informacion->ALU_SEM }}"
-                                            pattern="[0-9]{1,6}" maxlength="4" class="form-control form-control-sm"
-                                            placeholder="Numeros" required>
-                                        {!! $errors->first('ALU_SEM','<span class="alert-danger">:message</span><br>')
-                                        !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">FIN_AN:</label>
-                                        <input type="tel" name="ALU_FIN_AN" value="{{ $informacion->ALU_FIN_AN }}"
-                                            pattern="[0-9]{1,6}" maxlength="4" class="form-control form-control-sm"
-                                            placeholder="Numeros" required>
-                                        {!! $errors->first('ALU_FIN_AN','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div class="row">
-
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">AN_BAJ:</label>
-                                        <input type="tel" name="ALU_AN_BAJ" value="{{ $informacion->ALU_AN_BAJ }}"
-                                            pattern="[0-9]{1,6}" maxlength="4" class="form-control form-control-sm"
-                                            placeholder="Numeros" required>
-                                        {!! $errors->first('ALU_AN_BAJ','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">PER_BAJ:</label>
-                                        <input type="text" name="ALU_PER_BAJ" value="{{ $informacion->ALU_PER_BAJ }}"
-                                            pattern="[A-Zz-a]{1,8}" maxlength="8" class="form-control form-control-sm"
-                                            placeholder="PER_BAJ" required>
-                                        {!! $errors->first('ALU_PER_BAJ','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">FIN_PER:</label>
-                                        <input type="text" name="ALU_FIN_PER" value="{{ $informacion->ALU_FIN_PER }}"
-                                            pattern="[a-zZ-A]{1,8}" maxlength="8" class="form-control form-control-sm"
-                                            placeholder="FIN_PER" required>
-                                        {!! $errors->first('ALU_FIN_PER','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">MOT_BAJ:</label>
-                                        <input type="text" name="ALU_MOT_BAJ" value="{{ $informacion->ALU_MOT_BAJ }}"
-                                            pattern="[a-zZ-A]{1,40}" maxlength="40" class="form-control form-control-sm"
-                                            placeholder="MOT_BAJ" required>
-                                        {!! $errors->first('ALU_MOT_BAJ','<span
-                                            class="alert-danger">:message</span><br>') !!}
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-
-
-
-
-
-                        </div>
-                    </div>
 
                 </div>
 

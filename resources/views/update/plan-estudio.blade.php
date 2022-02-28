@@ -1,6 +1,23 @@
 @extends('layout/main')
 
 @section('contenido-main')
+
+
+
+<div class="container">
+    @if(Session::get('errorid'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Alerta!</h4>
+        <p>{{ Session::get('errorid') }}</p>
+
+
+    </div>
+    @endif
+
+</div>
 <!--INICIO CUADRO SALIDA AGREGAR PLAN-->
 
 
@@ -27,7 +44,7 @@
                         <label for="exampleFormControlInput1">ID:</label>
                         <input type="text" name="ID_PLANESTUDIO" class="form-control form-control-sm"
                             pattern="[A-Zz-a]{1,30}" maxlength="30" placeholder="ID Plan"
-                            value="{{ old('ID_PLANESTUDIO') }}" required disabled>
+                            value="{{ $informacion->ID_PLANESTUDIO}}" required>
                         {!! $errors->first('ID_PLANESTUDIO','<span class="alert-danger">:message</span><br>')
                         !!}
 
@@ -51,11 +68,13 @@
 
                             <option> {{ $informacion->PLAN_ID_IDIOMA }} </option>
 
-                            <?php foreach ($selecidioma as $item) {?> <option>
-                                <?php echo $item->	ID_IDIOMA ; ?> </option>
-                            <?php
-                                                        }//cierro el foreach
-                                                        ?>
+                            <option> Ingles </option>
+                            <option> Espanol </option>
+                            <option> Frances </option>
+                            <option> Italiano </option>
+                            <option> Ruso </option>
+                            <option> Chilango </option>
+
 
                         </select>
                     </div>
@@ -63,7 +82,7 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Inicio:</label>
-                        <input type="text" name="PLAN_IN" pattern="[a-zZ-A]{1,30}" maxlength="30"
+                        <input type="date" name="PLAN_IN" pattern="[a-zZ-A]{1,30}" maxlength="30"
                             class="form-control form-control-sm" placeholder="Inicio del Plan"
                             value="{{ $informacion->PLAN_IN }}" required>
                         {!! $errors->first('PLAN_IN','<span class="alert-danger">:message</span><br>')
@@ -74,7 +93,7 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Final:</label>
-                        <input type="text" name="PLAN_FIN" pattern="[a-zZ-A]{1,30}" maxlength="30"
+                        <input type="date" name="PLAN_FIN" pattern="[a-zZ-A]{1,30}" maxlength="30"
                             class="form-control form-control-sm" placeholder="Final del Plan"
                             value="{{ $informacion->PLAN_FIN }}" required>
                         {!! $errors->first('PLAN_FIN','<span class="alert-danger">:message</span><br>')
@@ -96,9 +115,9 @@
 
 
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">CMOD:</label>
+                        <label for="exampleFormControlInput1">Cantidad de Modulos:</label>
                         <input type="text" name="PLAN_CMOD" pattern="[a-zZ-A]{1,30}" maxlength="30"
-                            class="form-control form-control-sm" placeholder="CMOD"
+                            class="form-control form-control-sm" placeholder="Cantidad de Modulos"
                             value="{{ $informacion->PLAN_CMOD }}" required>
                         {!! $errors->first('PLAN_CMOD','<span class="alert-danger">:message</span><br>')
                         !!}

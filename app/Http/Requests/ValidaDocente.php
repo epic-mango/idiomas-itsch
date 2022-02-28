@@ -25,27 +25,25 @@ class ValidaDocente extends FormRequest
     {
         return [
 
-            'ID_DOCENTE' => 'required|max:30',
+            'ID_DOCENTE' => 'required|max:6',
             'DOCENTE_CLAVE' => 'required|max:30',
             'DOCENTE_AP_PAT' => 'required|max:30',
             'DOCENTE_AP_MAT' => 'max:30',
             'DOCENTE_NOMBRE' => 'required|max:30',
             'DOCENTE_SEXO' => 'required',
-            'DOCENTE_TIPO_SANGRE' => 'required|max:5',
+            'DOCENTE_TIPO_SANGRE' => 'max:5',
             'DOCENTE_FECHA_NAC' => 'required|date',
             'DOCENTE_CALLE' => 'required|max:30',
             'DOCENTE_COLONIA' => 'required|max:30',
             'DOCENTE_MUNICIPIO' => 'required|max:30',
             'DOCENTE_ESTADO' => 'required|max:30',
-            'DOCENTE_MOVIL' => 'required|numeric|min:1',
-            'DOCENTE_CASA' => 'required|numeric|min:1',
-            'DOCENTE_CORREO' => 'required|max:30|email',
-            'DOCENTE_CLAVE_PROFESIONAL' => 'required|max:30',
-            'DOCENTE_ESPECIALIDAD' => 'required|max:30',
+
+            'DOCENTE_CORREO' => 'required|max:30',
+            'DOCENTE_GRADO_ESCOLAR' => 'max:30',
+            'DOCENTE_ESPECIALIDAD' => 'max:30',
             'DOCENTE_FECHA_ING' => 'required|date',
             'DOCENTE_OBSERVACIONES' => 'required|max:500',
-            'DOCENTE_PWD' => 'required|max:30',
-            'CAT_EPR' => 'required|max:15'
+
             //
         ];
     }

@@ -5,7 +5,7 @@
 <!--INICIO CUADRO SALIDA AGREGAR MODULO-->
 
 
-<div class="modal-dialog modal-xl">
+<div class="modal-dialog modal-sm">
     <div class="modal-content">
 
         <div class="modal-header">
@@ -36,29 +36,37 @@
 
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Tiempo</label>
-                            <input name="MODULO_TIEMPO" value="{{ $informacion->MODULO_TIEMPO }}" type="tel"
-                                maxlength="11" pattern="[0-9]{1,11}" class="form-control form-control-sm"
-                                placeholder="Cantidad" required>
-                            {!! $errors->first('MODULO_TIEMPO','<span class="alert-danger">:message</span><br>')
-                            !!}
-                        </div>
+
 
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Nombre:</label>
-                            <input type="text" name="RET_NOM" class="form-control form-control-sm" maxlength="5"
-                                placeholder="Clave" value="{{ $informacion->RET_NOM }}" required>
+                            <label for="exampleFormControlInput1">Nombre Reticula:</label>
+                            <input type="text" name="RETICULA_NOMBRE" class="form-control form-control-sm" maxlength="5"
+                                placeholder="Reticula" value="{{ $informacion->RETICULA_NOMBRE }}" required>
                             {!! $errors->first('RET_NOM','<span class="alert-danger">:message</span><br>')
                             !!}
 
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">ORD:</label>
-                            <input name="RET_ORD" value="{{ $informacion->RET_ORD }}" type="tel" maxlength="4"
-                                pattern="[0-9]{1,4}" class="form-control form-control-sm" placeholder="ORD" required>
-                            {!! $errors->first('RET_ORD','<span class="alert-danger">:message</span><br>') !!}
+                            <label for="exampleFormControlInput1">Plan de Estudio:</label>
+
+                            <select name="MODULO_ID_PLANESTUDIO" class="form-control form-control-sm"
+                                id="exampleFormControlSelect1" required>
+
+                                <option> {{ $informacion->MODULO_ID_PLANESTUDIO }}</option>
+                                <?php foreach ($selecplan as $item) {?>
+                                <option>
+                                    <?php echo $item->ID_PLANESTUDIO; ?>
+                                </option>
+                                <?php
+                                    }//cierro el foreach
+                                    ?>
+
+
+                            </select>
+
+                            {!! $errors->first('MODULO_ID_PLANESTUDIO','<span class="alert-danger">:message</span><br>')
+                            !!}
                         </div>
 
 
