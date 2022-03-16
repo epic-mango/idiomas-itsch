@@ -121,7 +121,7 @@ Route::post('/cardex', 'App\Http\Controllers\ControllerCardex@agregacardex')->na
 
 
 
-Route::get('busquedas', 'ControllerBusquuedas@email')->name('busquedas');
+Route::get('busquedas', 'ControllerBusquedas@email')->name('busquedas');
 
 
 

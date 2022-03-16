@@ -20,8 +20,6 @@ class ControllerAdministrador extends Controller
             ->join('users',  'users.id', '=', 'administradors.ADMIN_CORREO')
             ->select('users.*', 'administradors.*')->get();
 
-
-
         return view('administrativo', compact('selecadmin'));
     }
 
