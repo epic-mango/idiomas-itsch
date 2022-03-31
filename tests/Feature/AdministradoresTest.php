@@ -139,4 +139,9 @@ class AdministradoresTest extends TestCase
         ])->assertRedirect();
         
     }
+
+    public function test_notlogged_cant_get_administrador(){
+        //Verificar que un usuario Alumno no puede añadir a un Administrador
+        $this->get('/administrativo')->assertForbidden();
+    }
 }
