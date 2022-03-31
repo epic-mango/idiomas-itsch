@@ -367,7 +367,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Email address</label>
                                         <input maxlength="30" type="" id="buscaremail" class="form-control"
-                                            name="ADMIN_CORREO" value="{{ auth()->user()->id }}"
+                                            name="ADMIN_CORREO" value=""
                                             placeholder="name@example.com" required>
                                         {!! $errors->first('ADMIN_CORREO','<span
                                             class="alert-danger">:message</span><br>') !!}
