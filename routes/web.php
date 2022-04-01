@@ -2,44 +2,52 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ControllerAdministrador;
+use App\Http\Controllers\ControllerSecretaria;
+use App\Http\Controllers\HomeController;
 
 //llamados para mostrar
 Route::get('/', 'App\Http\Controllers\ControllerInicio@index');
 Route::get('/consulta', 'App\Http\Controllers\ControllerAlumno@mostalumno');
 Route::get('/grupo', 'App\Http\Controllers\ControllerGrupo@mostgrupo');
-Route::get('/administrativo', 'App\Http\Controllers\ControllerAdministrador@mostadmin')->middleware('permission:Admin');
-Route::get('/secretaria', 'App\Http\Controllers\ControllerSecre@mostsecre')->middleware('permission:Admin');
-
 Route::get('/modulo', 'App\Http\Controllers\ControllerModulo@mostmodulo');
-
 Route::get('/plan-estudio', 'App\Http\Controllers\ControllerPlan_Estudio@mostplan');
 Route::get('/inscripcion', 'App\Http\Controllers\ControllerInscripcion@mostinscripcion');
-
 Route::get('/calificacion', 'App\Http\Controllers\ControllerCalificacion@mostcalificacion');
 Route::get('/adeudo', 'App\Http\Controllers\ControllerAdeudo@mostadeudo');
 //Route::get('/cardex', 'App\Http\Controllers\ControllerCardex@mostcardex');
-
 Route::get('/cardex2', 'App\Http\Controllers\ControllerInicio@cardex');
 Route::get('/calificacion2', 'App\Http\Controllers\ControllerInicio@calificacion2');
 Route::get('/docente-calif', 'App\Http\Controllers\ControllerInicio@docentecalif');
 
+//      CRUD        ADMINISTRATIVO
+/*C*/
+Route::post('/administrativo', [ControllerAdministrador::class, 'agregaadmin'])->name('insert.agregar-admin')->middleware('permission:Admin');
+/*R*/
+Route::get('/administrativo', [ControllerAdministrador::class, 'mostadmin'])->name('admin.actualizado')->middleware('permission:Admin');
+/*U*/
+Route::get('/update/administrador/{id_alu}', [ControllerAdministrador::class, 'edit'])->name('update.mostadmin_modificar');
+Route::patch('/update/administrador/{id_alu}', [ControllerAdministrador::class, 'modificaradmin'])->name('update.modoficar-admin');
+/*D*/
+Route::get('/administrativo/{id_alu}', [ControllerAdministrador::class, 'eliminaradmin'])->name('delete.admin_eliminar')->middleware('permission:Admin');
 
-
-
+//      CRUD        SECRETARIA
+/*C*/
+Route::post('/secretaria', 'App\Http\Controllers\ControllerSecretaria@agregasecre')->name('insert.agregar-secre')->middleware('permission:Admin');
+/*R*/
+Route::get('/secretaria', 'App\Http\Controllers\ControllerSecretaria@mostsecre')->name('secre.actualizado')->middleware('permission:Admin');
+/*U*/
+Route::get('/update/secretaria/{id_alu}', [ControllerSecretaria::class, 'edit'])->name('update.mostsecre_modificar')->middleware('permission:Admin');
+Route::patch('/update/secretaria/{id_alu}', [ControllerSecretaria::class, 'modificarsecre'])->name('update.modoficar-secre')->middleware('permission:Admin');
+/*D*/
+Route::get('/secretaria/{id_alu}', 'App\Http\Controllers\ControllerSecretaria@eliminarsecre')->name('delete.secre_eliminar')->middleware('permission:Admin');
 
 //Updates
 //alumno
 Route::get('/update/alumno/{id_alu}', 'App\Http\Controllers\ControllerAlumno@edit')->name('update.mostalumno_modificar');
 Route::patch('/update/alumno/{id_alu}', 'App\Http\Controllers\ControllerAlumno@modificaralumno')->name('update.modoficar-alumno');
 Route::get('/consulta', 'App\Http\Controllers\ControllerAlumno@mostalumno')->name('alumno.actualizado');
-//admin
-Route::get('/update/administrador/{id_alu}', 'App\Http\Controllers\ControllerAdministrador@edit')->name('update.mostadmin_modificar');
-Route::patch('/update/administrador/{id_alu}', 'App\Http\Controllers\ControllerAdministrador@modificaradmin')->name('update.modoficar-admin');
-Route::get('/administrativo', 'App\Http\Controllers\ControllerAdministrador@mostadmin')->name('admin.actualizado')->middleware('permission:Admin');
-//secre
-Route::get('/update/secretaria/{id_alu}', 'App\Http\Controllers\ControllerSecretaria@edit')->name('update.mostsecre_modificar')->middleware('permission:Admin');
-Route::patch('/update/secretaria/{id_alu}', 'App\Http\Controllers\ControllerSecretaria@modificarsecre')->name('update.modoficar-secre')->middleware('permission:Admin');
-Route::get('/secretaria', 'App\Http\Controllers\ControllerSecretaria@mostsecre')->name('secre.actualizado')->middleware('permission:Admin');
+
 //docente
 Route::get('/update/docente/{id_alu}', 'App\Http\Controllers\ControllerDocente@edit')->name('update.mostdocente_modificar')->middleware('permission:Secre|Admin');
 Route::patch('/update/docente/{id_alu}', 'App\Http\Controllers\ControllerDocente@modificardocente')->name('update.modoficar-docente')->middleware('permission:Secre|Admin');
@@ -84,8 +92,8 @@ Route::get('/cardex', 'App\Http\Controllers\ControllerCardex@mostcardex')->name(
 
 //deletes
 Route::get('/consulta/{id_alu}', 'App\Http\Controllers\ControllerAlumno@eliminaralumno')->name('delete.alumno_eliminar');
-Route::get('/administrativo/{id_alu}', 'App\Http\Controllers\ControllerAdministrador@eliminaradmin')->name('delete.admin_eliminar')->middleware('permission:Admin');
-Route::get('/secretaria/{id_alu}', 'App\Http\Controllers\ControllerSecretaria@eliminarsecre')->name('delete.secre_eliminar')->middleware('permission:Admin');
+
+
 Route::get('/docente/{id_alu}', 'App\Http\Controllers\ControllerDocente@eliminardocente')->name('delete.docente_eliminar')->middleware('permission:Secre|Admin');
 
 Route::get('/modulo/{id_alu}', 'App\Http\Controllers\ControllerModulo@eliminarmodulo')->name('delete.modulo_eliminar');
@@ -100,11 +108,11 @@ Route::get('/cardex/{id_alu}', 'App\Http\Controllers\ControllerCardex@eliminarca
 
 
 //llamado para insertar
-Route::post('/administrativo', 'App\Http\Controllers\ControllerAdministrador@agregaadmin')->name('insert.agregar-admin')->middleware('permission:Admin');
+
 Route::post('/grupo', 'App\Http\Controllers\ControllerGrupo@agregagrupo')->name('insert.agregar-grupo');
 Route::post('/consulta', 'App\Http\Controllers\ControllerAlumno@agregaalumno')->name('insert.agregar-alumno');
 Route::post('/docente', 'App\Http\Controllers\ControllerDocente@agregadocente')->name('insert.agregar-docente')->middleware('permission:Secre|Admin');
-Route::post('/secretaria', 'App\Http\Controllers\ControllerSecretaria@agregasecre')->name('insert.agregar-secre')->middleware('permission:Admin');
+
 
 Route::post('/modulo', 'App\Http\Controllers\ControllerModulo@agregamodulo')->name('insert.agregar-modulo');
 
@@ -125,4 +133,4 @@ Route::get('busquedas', 'ControllerBusquedas@email')->name('busquedas');
 Auth::routes();
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

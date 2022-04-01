@@ -2,20 +2,42 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-
-
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Auth;
+
 
 class AdministradoresTest extends TestCase
 {
-    
     use DatabaseTransactions;
+
+    public function test_administradores_page(){
+
+        //Alguien externo no debería poder ver la página
+        $this->get("/administrativo")->assertForbidden();
+
+        //Agregar un nuevo usuario
+        $user = User::create([
+            'name' => 'Prueba',
+            'email' => 'Prueba@gmail.com',
+            'password' => bcrypt('1234567890'),
+        ])->assignRole('Admin');
+
+        //Verificar si se ha creado el nuevo usuario
+        $this->assertCredentials([
+            'email' => 'Prueba@gmail.com',
+            'password' => '1234567890',
+        ]);
+        
+        //Verificar que se le dio el Rol de Admin al administrador
+        $this->assertTrue($user->hasRole('Admin'));
+
+        //Un administrador debe poder ver la página
+        $this->actingAs($user)->get("/administrativo")->assertSee("Consulta de Admins");
+
+    }
+    
+    
     
     /**
      * @test
