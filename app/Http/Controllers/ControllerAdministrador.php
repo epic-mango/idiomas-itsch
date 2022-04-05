@@ -7,6 +7,7 @@ use App\Models\Administrador;
 use App\Models\Alumno;
 use App\Models\Docente;
 use App\Models\Secretaria;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -42,8 +43,9 @@ class ControllerAdministrador extends Controller
                 return back();
             } else {
                 //Sino Entra a la condicion de Agregar
-                DB::insert(
 
+
+                DB::insert(
                     'INSERT INTO `administradors` (
                     `ID_ADMIN`, `ADMIN_CLAVE`, `ADMIN_AP_PAT`, `ADMIN_AP_MAT`, `ADMIN_NOMBRE`, `ADMIN_SEXO`, `ADMIN_TIPO_SANGRE`, 
                     `ADMIN_FECHA_NAC`, `ADMIN_CALLE`, `ADMIN_COLONIA`, `ADMIN_MUNICIPIO`, `ADMIN_ESTADO`, `ADMIN_MOVIL`, `ADMIN_CASA`, 
@@ -69,12 +71,13 @@ class ControllerAdministrador extends Controller
                         $informacion->ADMIN_ESPECIALIDAD,
                         $informacion->ADMIN_FECHA_ING,
                         $informacion->ADMIN_OBSERVACIONES,
-
-
-
                     ]
-
                 );
+
+                $user = User::find($informacion->ADMIN_CORREO);
+
+                $user->assignRole('Admin');
+                $user->removeRole('Alum');
 
                 return back();
             }
@@ -85,26 +88,16 @@ class ControllerAdministrador extends Controller
     //dif
     public function edit($id)
     {
-
         //Nos manda el Id a modificar para poder seleccionar su informacion y mandar a nueva ventana
-
         $selecadmin = Administrador::where('ID_ADMIN', $id)->get();
-
-
-
         return view('update/administrador', compact('selecadmin'));
     }
-
-
 
     public function modificaradmin(Request $informacion, $id)
 
     {
-
-
         //Validamos que los campos sean correctos
         $informacion->validate([
-
             'ADMIN_CLAVE' => 'required|max:30',
             'ADMIN_AP_PAT' => 'required|max:30',
             'ADMIN_AP_MAT' => 'max:30',
@@ -116,29 +109,13 @@ class ControllerAdministrador extends Controller
             'ADMIN_COLONIA' => 'required|max:30',
             'ADMIN_MUNICIPIO' => 'required|max:30',
             'ADMIN_ESTADO' => 'required|max:30',
-
-
             'ADMIN_CLAVE_PROFESIONAL' => 'max:30',
             'ADMIN_ESPECIALIDAD' => 'max:30',
             'ADMIN_FECHA_ING' => 'required|date',
             'ADMIN_OBSERVACIONES' => 'max:500',
         ]);
 
-
-
-
-
-
-
-
-
-
-
-
         $selecalum = DB::table('administradors')->where('ID_ADMIN', $id)->update([
-
-
-
             'ID_ADMIN' => $id,
             'ADMIN_CLAVE' => $informacion->ADMIN_CLAVE,
             'ADMIN_AP_PAT' => $informacion->ADMIN_AP_PAT,
@@ -158,37 +135,13 @@ class ControllerAdministrador extends Controller
             'ADMIN_ESPECIALIDAD' => $informacion->ADMIN_ESPECIALIDAD,
             'ADMIN_FECHA_ING' => $informacion->ADMIN_FECHA_ING,
             'ADMIN_OBSERVACIONES' => $informacion->ADMIN_OBSERVACIONES,
-
-
-
-
         ]);
         return redirect()->route('admin.actualizado');
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function eliminaradmin($id)
-    {
-
-
-        //Eliminamos la informacion de la id mandada
+    { //Eliminamos la informacion de la id mandada
         DB::table('administradors')->where('ID_ADMIN', '=', $id)->delete();
-
-
-
-
         return redirect()->route('admin.actualizado');
     }
 }

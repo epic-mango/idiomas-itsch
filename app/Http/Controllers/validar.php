@@ -59,7 +59,7 @@ class validar
         $existeemailDoc = Docente::where('DOCENTE_CORREO', $informacion->ADMIN_CORREO)->count();
 
 
-        if ($existeemailAdm > 0 | $existeemailSec > 0 | $existeemailAl > 0 | $existeemailDoc > 0) {
+        if ($existeemailAdm > 0 || $existeemailSec > 0 || $existeemailAl > 0 || $existeemailDoc > 0) {
 
             return 1;
         } else {
@@ -76,7 +76,7 @@ class validar
         $existeIdDoc = Docente::where('ID_DOCENTE', $informacion->ID_ADMIN)->count();
 
 
-        if ($existeIdAdm > 0 || $existeIdAl > 0 | $existeIdDoc > 0 || $existeIdSec > 0) {
+        if ($existeIdAdm > 0 || $existeIdAl > 0 || $existeIdDoc > 0 || $existeIdSec > 0) {
 
             return 1;
         } else {
