@@ -22,7 +22,7 @@ class ControllerAdeudo extends Controller
                 'alumnos.ALUMNO_APELLIDO_PAT',
 
                 'adeudos.ID_ADEUDO',
-                'adeudos.ADEUDO_MONTO_RESTANTE'
+                'adeudos.ADEUDO_MONTO'
 
 
             )->get();

@@ -9,6 +9,7 @@ use App\Models\Docente;
 use App\Models\Secretaria;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ControllerAdministrador extends Controller
@@ -141,7 +142,18 @@ class ControllerAdministrador extends Controller
 
     public function eliminaradmin($id)
     { //Eliminamos la informacion de la id mandada
+
+        $id_user = DB::table('administradors')->join('users', 'users.id', '=', 'administradors.ADMIN_CORREO')->where('ID_ADMIN', '=', $id)->first('users.id');
+
+        $user = User::find($id_user->id);
+
+        $user->assignRole('Alum');
+        $user->removeRole('Admin');
+
+        
+
         DB::table('administradors')->where('ID_ADMIN', '=', $id)->delete();
+
         return redirect()->route('admin.actualizado');
     }
 }

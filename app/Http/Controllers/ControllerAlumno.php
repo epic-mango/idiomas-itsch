@@ -43,7 +43,6 @@ class ControllerAlumno extends Controller
     }
 
     public function agregaalumno(ValidaAlumno $informacion)
-
     {
 
 
