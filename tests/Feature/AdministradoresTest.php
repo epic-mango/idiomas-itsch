@@ -91,7 +91,7 @@ class AdministradoresTest extends TestCase
     public function notlogged_cant_add_administrador()
     {
 
-        //Verificar que un usuario Alumno no puede añadir a un Administrador
+        //Verificar que sin login no puede añadir a un Administrador
         $this->post('/administrativo', [
             'ID_ADMIN' => '1',
             'ADMIN_CLAVE' => 'Abcde54321',
@@ -161,6 +161,10 @@ class AdministradoresTest extends TestCase
             'ADMIN_FECHA_ING' => '2022-07-22',
             'ADMIN_OBSERVACIONES' => 'Nada',
         ])->assertRedirect();
+
+        $user = User::where('email', 'Prueba@gmail.com')->first();
+
+        $this->assertTrue($user->hasRole('Admin'));
     }
 
     public function test_notlogged_cant_get_administrador()
@@ -241,10 +245,8 @@ class AdministradoresTest extends TestCase
             'ADMIN_FECHA_ING' => '2022-07-22',
             'ADMIN_OBSERVACIONES' => 'Nada',
         ])->assertForbidden();
-        
+
         $this->assertFalse($user->hasRole('Admin'));
         $this->assertTrue($user->hasRole('Alum'));
-
-        
     }
 }

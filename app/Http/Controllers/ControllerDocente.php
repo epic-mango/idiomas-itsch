@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidaDocente;
-use App\Models\Administrador;
-use App\Models\Alumno;
 use App\Models\Docente;
-use App\Models\Secretaria;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,29 +27,19 @@ class ControllerDocente extends Controller
 
     public function agregadocente(ValidaDocente $informacion)
     {
-
-
-
-
         $validar = new validar();
-
 
         //Condicion de mensaje para informar sin el Id ya esta registrada en otro usuario
         if ($validar->iddocente($informacion) > 0) {
-
             session()->flash('errorid', 'El ID ingresado ya Existe');
             return back();
         } else {
-
             //Condicion de mensaje para informar si el Correo ya esta registrado en otro usuario
             if ($validar->emaildocente($informacion) > 0) {
                 session()->flash('erroremail', 'El Correo Electronico ingresado ya esta registrado a un usuario');
                 return back();
             } else {
                 DB::insert(
-
-
-
                     'INSERT INTO `docentes` (
                     `ID_DOCENTE`, `DOCENTE_CLAVE`, `DOCENTE_AP_PAT`, `DOCENTE_AP_MAT`, `DOCENTE_NOMBRE`, `DOCENTE_SEXO`, `DOCENTE_TIPO_SANGRE`,
                      `DOCENTE_FECHA_NAC`, `DOCENTE_CALLE`, `DOCENTE_COLONIA`, `DOCENTE_MUNICIPIO`, `DOCENTE_ESTADO`, `DOCENTE_MOVIL`, `DOCENTE_CASA`, 
@@ -77,13 +65,13 @@ class ControllerDocente extends Controller
                         $informacion->DOCENTE_ESPECIALIDAD,
                         $informacion->DOCENTE_FECHA_ING,
                         $informacion->DOCENTE_OBSERVACIONES,
-
-
-
                     ]
 
                 );
             }
+
+            $user = User::find($informacion->DOCENTE_CORREO);
+            $user->syncRoles(['Docente']);
         }
 
 
@@ -179,7 +167,11 @@ class ControllerDocente extends Controller
 
     public function eliminardocente($id)
     {
-        //eliminamos el docente 
+        //eliminamos el docente
+        $id_user = DB::table('docentes')->join('users', 'users.id', '=', 'docentes.DOCENTE_CORREO')->where('ID_DOCENTE', '=', $id)->first('users.id');
+
+        $user = User::find($id_user->id);
+        $user->syncRoles(['Alum']);
         DB::table('docentes')->where('ID_DOCENTE', '=', $id)->delete();
 
 

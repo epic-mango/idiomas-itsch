@@ -76,9 +76,7 @@ class ControllerAdministrador extends Controller
                 );
 
                 $user = User::find($informacion->ADMIN_CORREO);
-
-                $user->assignRole('Admin');
-                $user->removeRole('Alum');
+                $user->syncRoles(['Admin']);
 
                 return back();
             }
@@ -144,13 +142,8 @@ class ControllerAdministrador extends Controller
     { //Eliminamos la informacion de la id mandada
 
         $id_user = DB::table('administradors')->join('users', 'users.id', '=', 'administradors.ADMIN_CORREO')->where('ID_ADMIN', '=', $id)->first('users.id');
-
         $user = User::find($id_user->id);
-
-        $user->assignRole('Alum');
-        $user->removeRole('Admin');
-
-        
+        $user->syncRoles(['Alum']);
 
         DB::table('administradors')->where('ID_ADMIN', '=', $id)->delete();
 

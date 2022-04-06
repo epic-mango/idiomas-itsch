@@ -37,7 +37,8 @@ class ValidaDocente extends FormRequest
             'DOCENTE_COLONIA' => 'required|max:30',
             'DOCENTE_MUNICIPIO' => 'required|max:30',
             'DOCENTE_ESTADO' => 'required|max:30',
-
+            'DOCENTE_MOVIL' => 'required',
+            'DOCENTE_CASA' => 'required',
             'DOCENTE_CORREO' => 'required|max:30',
             'DOCENTE_GRADO_ESCOLAR' => 'max:30',
             'DOCENTE_ESPECIALIDAD' => 'max:30',
