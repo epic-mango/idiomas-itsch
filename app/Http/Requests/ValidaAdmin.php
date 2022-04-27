@@ -37,14 +37,11 @@ class ValidaAdmin extends FormRequest
             'ADMIN_COLONIA' => 'required|max:30',
             'ADMIN_MUNICIPIO' => 'required|max:30',
             'ADMIN_ESTADO' => 'required|max:30',
-
             'ADMIN_CORREO' => 'required|min:1',
             'ADMIN_CLAVE_PROFESIONAL' => 'max:30',
             'ADMIN_ESPECIALIDAD' => 'max:30',
             'ADMIN_FECHA_ING' => 'required|date',
             'ADMIN_OBSERVACIONES' => 'max:500',
-
-
         ];
     }
 }

@@ -44,8 +44,6 @@ class ControllerAdministrador extends Controller
                 return back();
             } else {
                 //Sino Entra a la condicion de Agregar
-
-
                 DB::insert(
                     'INSERT INTO `administradors` (
                     `ID_ADMIN`, `ADMIN_CLAVE`, `ADMIN_AP_PAT`, `ADMIN_AP_MAT`, `ADMIN_NOMBRE`, `ADMIN_SEXO`, `ADMIN_TIPO_SANGRE`, 

@@ -138,8 +138,6 @@
                 </div>
                 <form action="{{ route('insert.agregar-admin') }}" method="POST">
                     @csrf
-
-
                     <div class="row>">
                         <div class="col-sm">
 
@@ -339,11 +337,7 @@
                                             <input type="tel" class="form-control form-control-sm" pattern="[0-9]{1,30}"
                                                 maxlength="30" name="ADMIN_MOVIL" value="{{ old('ADMIN_MOVIL') }}"
                                                 placeholder="Telefono Celular">
-                                            {!! $errors->first(
-    'ADMIN_MOVIL',
-    '<span
-                                            class="alert-danger">:message</span><br>',
-) !!}
+                                            {!! $errors->first('ADMIN_MOVIL', '<spanclass="alert-danger">:message</span><br>') !!}
                                         </div>
                                     </div>
                                     <div class="col-sm">
@@ -352,23 +346,15 @@
                                             <input type="tel" class="form-control form-control-sm" name="ADMIN_CASA"
                                                 value="{{ old('ADMIN_CASA') }}" pattern="[0-9]{1,30}" maxlength="30"
                                                 placeholder="Telefono Casa">
-                                            {!! $errors->first(
-    'ADMIN_CASA',
-    '<span
-                                            class="alert-danger">:message</span><br>',
-) !!}
+                                            {!! $errors->first('ADMIN_CASA', '<spanclass="alert-danger">:message</span><br>') !!}
                                         </div>
                                     </div>
                                     <div class="col-sm">
                                         <div class="form-group">
-                                            <label for="exampleFormControlInput1">Email address</label>
-                                            <input maxlength="30" type="" id="buscaremail" class="form-control"
-                                                name="ADMIN_CORREO" value="" placeholder="name@example.com" required>
-                                            {!! $errors->first(
-    'ADMIN_CORREO',
-    '<span
-                                            class="alert-danger">:message</span><br>',
-) !!}
+                                            <label for="buscaremail">Email address</label>
+                                            
+                                           @livewire('busqueda-correo')
+                                            {!! $errors->first('ADMIN_CORREO', '<spanclass="alert-danger">:message</span><br>') !!}
                                         </div>
                                     </div>
                                 </div>

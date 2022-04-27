@@ -12,7 +12,7 @@ class ControllerBusquuedas extends Controller
     public function email(Request $request)
     {
 
-        $term = $request->get('term');
+        $term = $request->get('q');
 
         $querys = User::where('email', 'LIKE', '%' . $term . '%')->get();
 

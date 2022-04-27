@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ControllerInicio extends Controller
 {
     public function index()
     {
-
-
-        return view('auth/login');
+        //Verificar si el usuario está autenticado
+        if (Auth::check()) {
+            //si está autenticado, mostrar la vista
+            return redirect('/home');
+        } else {
+            //si no está autenticado, mostrar el formulario de login
+            return view('auth/login');
+        }
+        
     }
 
 
