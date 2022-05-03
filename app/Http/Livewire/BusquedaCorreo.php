@@ -8,17 +8,35 @@ use Livewire\Component;
 class BusquedaCorreo extends Component
 {
     public $busqueda = '';
-    public $identificador = 0;
-    public $seleccionado = '';
+    public $seleccionado;
+    public $identificador;
+    public $resultado = [];
 
-    public function render()
+    public function updatedBusqueda($value)
     {
-
-        $resultado = [];
-        if (strlen($this->busqueda) > 0) {
-            $resultado = User::where('email', 'like', '%' . $this->busqueda . '%')->get();
-        }
-
-        return view('livewire.busqueda-correo', compact('resultado'));
+        if($this->seleccionado){
+            $this->busqueda = '';            
+        }           
+        $this->seleccionado = false;
+        $this->identificador = null;
     }
+
+    public function buscar()
+    {
+        if (strlen($this->busqueda) > 0) {
+            $this->resultado = User::where('email', 'like', '%' . $this->busqueda . '%')->role('Alum')->get();
+        }
+     
+
+    }
+
+    public function seleccionar($identificador, $email)
+    {
+        $this->seleccionado = true;
+        $this->identificador = $identificador;
+        $this->busqueda = $email;
+    }
+
+
+
 }

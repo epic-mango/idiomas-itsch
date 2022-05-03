@@ -14,7 +14,7 @@
     @livewireStyles
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     @livewireScripts
     <!--MENU-->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -146,8 +146,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                 document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -181,7 +182,7 @@
 
     @yield('contenido-main')
 
-    <footer class="bg-light text-center text-lg-start">
+    <footer class="bg-light text-center text-lg-start mt-auto">
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2020 Copyright:
@@ -240,20 +241,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@master/dist/latest/bootstrap-autocomplete.min.js">
     </script>
-    <!-- BUSQUEDAS EN IMPUTS -->
-    <script>
-        $('#buscaremail').autoComplete({
-            resolverSettings: {
-                url: '/busquedas',
-            }
-        });
-    </script>
 
-
-
-
-
-</body>
 </body>
 
 </html>

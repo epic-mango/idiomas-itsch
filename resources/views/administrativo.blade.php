@@ -101,7 +101,7 @@
                                             d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                                     </svg>
                                     Eliminar</a>
-                                <button type="button" class="btn btn-dark">
+                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-lg">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-person-lines-fill" viewBox="0 0 16 16">
                                         <path
@@ -147,7 +147,7 @@
                                         <label for="exampleFormControlInput1">ID:</label>
                                         <input type="text" name="ID_ADMIN" value="{{ old('ID_ADMIN') }}"
                                             pattern="[A-Zz-a]{1,10}" class="form-control form-control-sm" maxlength="10"
-                                            placeholder="ID" required>
+                                            placeholder="ID" >
                                         {!! $errors->first('ID_ADMIN', '<span class="alert-danger">:message</span><br>') !!}
                                     </div>
                                 </div>
@@ -354,7 +354,7 @@
                                             <label for="buscaremail">Email address</label>
                                             
                                            @livewire('busqueda-correo')
-                                            {!! $errors->first('ADMIN_CORREO', '<spanclass="alert-danger">:message</span><br>') !!}
+                                           
                                         </div>
                                     </div>
                                 </div>
