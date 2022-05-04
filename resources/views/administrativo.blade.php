@@ -89,7 +89,7 @@
                                         <path fill-rule="evenodd"
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                     </svg>
-                                    Editar</a>
+                                    Ver/Editar</a>
 
                                 <a type="button" class="btn btn-danger"
                                     href="{{ route('delete.admin_eliminar', $item->ID_ADMIN) }}">
@@ -101,13 +101,6 @@
                                             d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                                     </svg>
                                     Eliminar</a>
-                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
-                                    </svg>
-                                    Ver</button>
                             </center>
 
                         </td>
@@ -408,7 +401,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Observaciones:</label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" name="ADMIN_OBSERVACIONES" maxlength="500"
-                                            rows="3">Observaciones:</textarea>
+                                            rows="3" placeholder="Observaciones"></textarea>
                                     </div>
                                 </div>
 

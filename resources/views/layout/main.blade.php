@@ -31,22 +31,22 @@
                     </li>
                     @can('administrativo')
                         <li class="nav-item">
-                            <a class="nav-link" href="/administrativo">Administrador</a>
+                            <a class="nav-link" href="/administrativo">Administradores</a>
                         </li>
                     @endcan
                     @can('docente')
                         <li class="nav-item">
-                            <a class="nav-link" href="/docente">Docente</a>
+                            <a class="nav-link" href="/docente">Docentes</a>
                         </li>
                     @endcan
                     @can('consulta')
                         <li class="nav-item">
-                            <a class="nav-link " href="/consulta">Alumno</a>
+                            <a class="nav-link " href="/consulta">Alumnos</a>
                         </li>
                     @endcan
                     @can('secretaria')
                         <li class="nav-item">
-                            <a class="nav-link " href="/secretaria">Secretaria</a>
+                            <a class="nav-link " href="/secretaria">Secretarias</a>
                         </li>
                     @endcan
 
@@ -56,8 +56,6 @@
                         </li>
                     @endcan
                     @can('servicios')
-
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown07"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Servicios</a>

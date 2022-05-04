@@ -91,7 +91,6 @@ class ControllerAdministrador extends Controller
     }
 
     public function modificaradmin(Request $informacion, $id)
-
     {
         //Validamos que los campos sean correctos
         $informacion->validate([
