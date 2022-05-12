@@ -17,7 +17,7 @@
 <body class="d-flex flex-column min-vh-100">
     @livewireScripts
     <!--MENU-->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">SAI</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
@@ -146,7 +146,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                 document.getElementById('logout-form').submit();">
+                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -165,37 +165,22 @@
     </nav>
 
     <!--MENU FIN-->
-
-    <!--MAIN-->
-    <div class="">
-        <div class="container">
-            <center class="row align-items-center">
-                <img class="col-1" style="object-fit:contain;" src="{{ asset('image/itsch.png') }}" height="30px">
-                <h3 class = "col-11">Coordinacion de Lenguas Extranjeras</h3>
-            </center>
-        </div>
+    <div class="container my-5">
+        @yield('contenido-main')
     </div>
-
-    <!--MAIN FIN-->
-
-    @yield('contenido-main')
-
     <footer class="bg-light text-center text-lg-start mt-auto">
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            <a class="text-dark" href="">Mango Code Groove</a>
         </div>
         <!-- Copyright -->
     </footer>
 
 
-    <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}" crossorigin="anonymous">
-    </script>
-    <script src="{{ asset('js/popper.min.js') }}" crossorigin="anonymous">
-    </script>
-    <script src="{{ asset('js/bootstrap.min.js') }}" crossorigin="anonymous">
-    </script>
+    <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/popper.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
 
     <!-- BUSQUEDA con auto llenado -->
     <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
@@ -207,8 +192,7 @@
     <script src="{{ asset('js/dataTables.bootstrap5.min.js') }}"></script>
 
 
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" crossorigin="anonymous">
-    </script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
 
