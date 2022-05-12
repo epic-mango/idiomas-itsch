@@ -370,12 +370,8 @@
                                 </div>
                                 <div class="col-sm">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1">Email address</label>
-                                        <input maxlength="30" type="text" class="form-control" name="ADMIN_CORREO"
-                                            value=" {{ auth()->user()->id }}" id="exampleFormControlInput1"
-                                            placeholder="name@example.com" required>
-                                        {!! $errors->first('ADMIN_CORREO','<span
-                                            class="alert-danger">:message</span><br>') !!}
+                                        <label for="exampleFormControlInput1">Correo electrónico:</label>
+                                        @livewire('busqueda-correo', ['nombre'=>'ADMIN_CORREO'])
                                     </div>
                                 </div>
                             </div>
@@ -421,7 +417,7 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Observaciones:</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1"
-                                        name="ADMIN_OBSERVACIONES" maxlength="500" rows="3">Observaciones:</textarea>
+                                        name="ADMIN_OBSERVACIONES" maxlength="500" rows="3" placeholder="Observaciones"></textarea>
                                 </div>
                             </div>
 

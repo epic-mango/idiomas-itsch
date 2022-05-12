@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <input maxlength="30" type="hidden" id="buscaremail" name="ADMIN_CORREO" value="{{$identificador}}" required>
+    <input maxlength="30" type="hidden" id="buscaremail" name="{{$nombre}}" value="{{$identificador}}" required>
     {!! $errors->first('ADMIN_CORREO', '<spanclass="alert-danger">:message</span><br>') !!}
     <input type="text" class="form-control {{ $seleccionado ? 'is-valid' : 'is-invalid' }}" id="busqueda"
         wire:model="busqueda" autocomplete="off" placeholder="ejemplo@itsch.edu.mx" required />

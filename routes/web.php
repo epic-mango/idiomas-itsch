@@ -8,7 +8,6 @@ use App\Http\Controllers\HomeController;
 
 //llamados para mostrar
 Route::get('/', 'App\Http\Controllers\ControllerInicio@index');
-Route::get('/consulta', 'App\Http\Controllers\ControllerAlumno@mostalumno');
 Route::get('/plan-estudio', 'App\Http\Controllers\ControllerPlan_Estudio@mostplan');
 Route::get('/inscripcion', 'App\Http\Controllers\ControllerInscripcion@mostinscripcion');
 Route::get('/calificacion', 'App\Http\Controllers\ControllerCalificacion@mostcalificacion');
@@ -73,11 +72,16 @@ Route::patch('/update/docente/{id_alu}', 'App\Http\Controllers\ControllerDocente
 //DELETE
 Route::get('/docente/{id_alu}', 'App\Http\Controllers\ControllerDocente@eliminardocente')->name('delete.docente_eliminar')->middleware('permission:Secre|Admin');
 
-//Updates
-//alumno
+//      CRUD ALUMNOS
+//C
+Route::post('/alumno', 'App\Http\Controllers\ControllerAlumno@agregaalumno')->name('insert.agregar-alumno');
+//R
+Route::get('/alumno', 'App\Http\Controllers\ControllerAlumno@mostalumno')->name('alumno.actualizado');
+//U
 Route::get('/update/alumno/{id_alu}', 'App\Http\Controllers\ControllerAlumno@edit')->name('update.mostalumno_modificar');
 Route::patch('/update/alumno/{id_alu}', 'App\Http\Controllers\ControllerAlumno@modificaralumno')->name('update.modoficar-alumno');
-Route::get('/consulta', 'App\Http\Controllers\ControllerAlumno@mostalumno')->name('alumno.actualizado');
+//D
+Route::get('/alumno/{id_alu}', 'App\Http\Controllers\ControllerAlumno@eliminaralumno')->name('delete.alumno_eliminar');
 
 
 
@@ -111,12 +115,6 @@ Route::get('/cardex', 'App\Http\Controllers\ControllerCardex@mostcardex')->name(
 
 
 //deletes
-Route::get('/consulta/{id_alu}', 'App\Http\Controllers\ControllerAlumno@eliminaralumno')->name('delete.alumno_eliminar');
-
-
-
-
-
 
 Route::get('/plan-estudio/{id_alu}', 'App\Http\Controllers\ControllerPlan_Estudio@eliminarplan')->name('delete.plan_eliminar');
 
@@ -130,7 +128,7 @@ Route::get('/cardex/{id_alu}', 'App\Http\Controllers\ControllerCardex@eliminarca
 //llamado para insertar
 
 
-Route::post('/consulta', 'App\Http\Controllers\ControllerAlumno@agregaalumno')->name('insert.agregar-alumno');
+
 
 
 

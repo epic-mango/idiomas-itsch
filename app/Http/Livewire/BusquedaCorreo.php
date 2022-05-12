@@ -8,6 +8,7 @@ use Livewire\Component;
 class BusquedaCorreo extends Component
 {
     //Variables públicas que pueden ser accedidas desde la vista
+    public $nombre;
     public $busqueda = '';
     public $seleccionado;
     public $identificador;

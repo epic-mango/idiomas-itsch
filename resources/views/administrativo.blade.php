@@ -36,7 +36,7 @@
 
     <!-- Large modal -->
     <div class="container">
-        <h5>Consulta de Admins
+        <h5>Lista de administradores
             <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus"
@@ -346,7 +346,7 @@
                                         <div class="form-group">
                                             <label for="buscaremail">Email address</label>
                                             
-                                           @livewire('busqueda-correo')
+                                           @livewire('busqueda-correo', ['nombre'=>'ADMIN_CORREO'])
                                            
                                         </div>
                                     </div>

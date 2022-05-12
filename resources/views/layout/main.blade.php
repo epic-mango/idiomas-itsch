@@ -26,32 +26,32 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarsExample07">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item {{Route::currentRouteName() === 'home'?'active':''}}">
                         <a class="nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     @can('administrativo')
-                        <li class="nav-item">
-                            <a class="nav-link" href="/administrativo">Administradores</a>
+                        <li class="nav-item {{Route::currentRouteName() === 'admin.actualizado'?'active':'xD'}}" >
+                            <a class="nav-link" href="/administrativo" >Administradores</a>
                         </li>
                     @endcan
                     @can('docente')
-                        <li class="nav-item">
+                        <li class="nav-item {{Route::currentRouteName() === 'docente.actualizado'?'active':'xD'}}">
                             <a class="nav-link" href="/docente">Docentes</a>
                         </li>
                     @endcan
                     @can('consulta')
-                        <li class="nav-item">
-                            <a class="nav-link " href="/consulta">Alumnos</a>
+                        <li class="nav-item {{Route::currentRouteName() === 'alumno.actualizado'?'active':'xD'}}">
+                            <a class="nav-link " href="/alumno">Alumnos</a>
                         </li>
                     @endcan
                     @can('secretaria')
-                        <li class="nav-item">
+                        <li class="nav-item {{Route::currentRouteName() === 'secre.actualizado'?'active':'xD'}}">
                             <a class="nav-link " href="/secretaria">Secretarias</a>
                         </li>
                     @endcan
 
                     @can('calificaciondocentes')
-                        <li class="nav-item">
+                        <li class="nav-item {{Route::currentRouteName() === 'alumno.actualizado'?'active':'xD'}}">
                             <a class="nav-link " href="/docente-calif">Calificaciones</a>
                         </li>
                     @endcan
@@ -167,11 +167,11 @@
     <!--MENU FIN-->
 
     <!--MAIN-->
-    <div class="jumbotron jumbotron-fluid">
+    <div class="">
         <div class="container">
-            <img src="{{ asset('image/itsch.png') }}" width="100" height="120">
-            <center>
-                <h3>Coordinacion de Lenguas Extranjeras</h3>
+            <center class="row align-items-center">
+                <img class="col-1" style="object-fit:contain;" src="{{ asset('image/itsch.png') }}" height="30px">
+                <h3 class = "col-11">Coordinacion de Lenguas Extranjeras</h3>
             </center>
         </div>
     </div>

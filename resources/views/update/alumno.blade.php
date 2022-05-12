@@ -36,11 +36,7 @@
 
 </div>
 
-<!--Cuadro a Salir paraModificar ALumno-->
-
-
-
-
+<!--Cuadro a Salir para agregar ALumno-->
 <div class="modal-dialog modal-xl">
     <div class="modal-content">
 
