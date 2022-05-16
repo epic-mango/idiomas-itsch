@@ -26,97 +26,83 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarsExample07">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {{Route::currentRouteName() === 'home'?'active':''}}">
-                        <a class="nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
+                    <li class="nav-item {{ Route::currentRouteName() === 'home' ? 'active' : '' }}">
+                        <a class="nav-link" href="/">Noticias<span class="sr-only">(current)</span></a>
                     </li>
-                    @can('administrativo')
-                        <li class="nav-item {{Route::currentRouteName() === 'admin.actualizado'?'active':'xD'}}" >
-                            <a class="nav-link" href="/administrativo" >Administradores</a>
-                        </li>
-                    @endcan
-                    @can('docente')
-                        <li class="nav-item {{Route::currentRouteName() === 'docente.actualizado'?'active':'xD'}}">
-                            <a class="nav-link" href="/docente">Docentes</a>
-                        </li>
-                    @endcan
-                    @can('consulta')
-                        <li class="nav-item {{Route::currentRouteName() === 'alumno.actualizado'?'active':'xD'}}">
-                            <a class="nav-link " href="/alumno">Alumnos</a>
-                        </li>
-                    @endcan
-                    @can('secretaria')
-                        <li class="nav-item {{Route::currentRouteName() === 'secre.actualizado'?'active':'xD'}}">
-                            <a class="nav-link " href="/secretaria">Secretarias</a>
+
+                    @can('lv1ylv2')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="true">Personal</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown07">
+                                @can('administrativo')
+                                    <a class="dropdown-item {{ Route::currentRouteName() === 'admin.actualizado' ? 'active' : '' }}"
+                                        href="/administrativo">Administradores</a>
+                                @endcan
+                                @can('docente')
+                                    <a class="dropdown-item {{ Route::currentRouteName() === 'docente.actualizado' ? 'active' : '' }}"
+                                        href="/docente">Docentes</a>
+                                @endcan
+                                @can('secretaria')
+                                    <a class="dropdown-item {{ Route::currentRouteName() === 'secre.actualizado' ? 'active' : '' }}"
+                                        href="/secretaria">Secretarias</a>
+                                @endcan
+
+                            </div>
                         </li>
                     @endcan
 
-                    @can('calificaciondocentes')
-                        <li class="nav-item {{Route::currentRouteName() === 'alumno.actualizado'?'active':'xD'}}">
-                            <a class="nav-link " href="/docente-calif">Calificaciones</a>
-                        </li>
-                    @endcan
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="true">Alumnado</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown07">
+                            @can('consulta')
+                                <a class="dropdown-item {{ Route::currentRouteName() === 'alumno.actualizado' ? 'active' : '' }}"
+                                    href="/alumno">Alumnos</a>
+                            @endcan
+
+                            @can('cardex2')
+                                <a class="dropdown-item" href="/cardex2">Consultar calificaciones</a>
+                            @endcan
+
+
+                            @can('calificaciondocentes')
+                                <a class="dropdown-item" href="/docente-calif">Modificar Calificaciones</a>
+                            @endcan
+
+                            @can('adeudo')
+                                <a class="dropdown-item" href="/adeudo">Adeudos</a>
+                            @endcan
+                        </div>
+                    </li>
+
                     @can('servicios')
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown07"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Servicios</a>
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administración</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown07">
-
+                                @can('plan-estudio')
+                                    <a class="dropdown-item" href="/plan-estudio">Plan de Estudio</a>
+                                @endcan
                                 @can('modulo')
                                     <a class="dropdown-item" href="/modulo">Modulo</a>
                                 @endcan
 
-                            </div>
-                        </li>
-                    @endcan
-                    @can('lv1ylv2')
-
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="true">lv1 y 2</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown07">
                                 @can('grupo')
                                     <a class="dropdown-item" href="/grupo">Grupo</a>
                                 @endcan
-                                @can('plan-estudio')
-                                    <a class="dropdown-item" href="/plan-estudio">Plan de Estudio</a>
-                                @endcan
-                            </div>
-                        </li>
-                    @endcan
-                    @can('lv3')
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown07"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lv 3</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown07">
                                 @can('inscripcion')
                                     <a class="dropdown-item" href="/inscripcion">Inscripcion</a>
                                 @endcan
-
                                 @can('calificacion')
                                     <a class="dropdown-item" href="/calificacion2">Calificacion</a>
                                 @endcan
-
-
                             </div>
                         </li>
                     @endcan
-                    @can('lv4')
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown07"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lv 4</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown07">
-                                @can('adeudo')
-                                    <a class="dropdown-item" href="/adeudo">Adeudo</a>
-                                @endcan
-                                @can('cardex2')
-                                    <a class="dropdown-item" href="/cardex2">Cardex</a>
-                                @endcan
 
-                            </div>
-                        </li>
-                    @endcan
+
+
                 </ul>
 
                 <div id="app">
@@ -146,7 +132,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                         document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
