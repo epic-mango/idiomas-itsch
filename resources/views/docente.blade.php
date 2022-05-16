@@ -37,7 +37,7 @@
 
 <!-- Large modal -->
 <div class="container">
-  <h5>Lista de Docentes</h5>
+  <h5>Lista de Docentes
     <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">
 
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus"
@@ -47,8 +47,9 @@
         <path fill-rule="evenodd"
           d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
       </svg>
-      Agregar Docente
+      Agregar
     </button>
+  </h5>
 
 </div>
 

@@ -10,7 +10,7 @@
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
 
-            <h5>Coonsulta de Inscripcion
+            <h5>Consulta de Inscripcion
 
 
                 <!-- Large modal Boton Agregar Inscripcion -->

@@ -35,7 +35,7 @@ class AdministradoresTest extends TestCase
         $this->assertTrue($user->hasRole('Admin'));
 
         //Un administrador debe poder ver la página
-        $this->actingAs($user)->get("/administrativo")->assertSee("Lista de administradores");
+        $this->actingAs($user)->get("/administrativo")->assertSee("Lista de Administradores");
         
     }
 

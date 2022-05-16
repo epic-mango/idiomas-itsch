@@ -135,4 +135,4 @@ Route::get('busquedas', 'ControllerBusquuedas@email')->name('busquedas');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/noticias', [HomeController::class, 'index'])->name('home');

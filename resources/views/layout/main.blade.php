@@ -27,7 +27,7 @@
             <div class="collapse navbar-collapse" id="navbarsExample07">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item {{ Route::currentRouteName() === 'home' ? 'active' : '' }}">
-                        <a class="nav-link" href="/">Noticias<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('home')}}">Noticias<span class="sr-only">(current)</span></a>
                     </li>
 
                     @can('lv1ylv2')
@@ -37,15 +37,15 @@
                             <div class="dropdown-menu" aria-labelledby="dropdown07">
                                 @can('administrativo')
                                     <a class="dropdown-item {{ Route::currentRouteName() === 'admin.actualizado' ? 'active' : '' }}"
-                                        href="/administrativo">Administradores</a>
+                                        href="{{ route('admin.actualizado') }}">Administradores</a>
                                 @endcan
                                 @can('docente')
                                     <a class="dropdown-item {{ Route::currentRouteName() === 'docente.actualizado' ? 'active' : '' }}"
-                                        href="/docente">Docentes</a>
+                                        href="{{ route('docente.actualizado') }}">Docentes</a>
                                 @endcan
                                 @can('secretaria')
                                     <a class="dropdown-item {{ Route::currentRouteName() === 'secre.actualizado' ? 'active' : '' }}"
-                                        href="/secretaria">Secretarias</a>
+                                        href="{{ route('secre.actualizado') }}">Secretariado</a>
                                 @endcan
 
                             </div>
@@ -58,21 +58,28 @@
                         <div class="dropdown-menu" aria-labelledby="dropdown07">
                             @can('consulta')
                                 <a class="dropdown-item {{ Route::currentRouteName() === 'alumno.actualizado' ? 'active' : '' }}"
-                                    href="/alumno">Alumnos</a>
+                                    href="{{ route('alumno.actualizado') }}">Lista de Alumnos</a>
                             @endcan
 
                             @can('cardex2')
-                                <a class="dropdown-item" href="/cardex2">Consultar calificaciones</a>
+                                <a class="dropdown-item {{ Route::currentRouteName() === '' ? 'active' : '' }}"
+                                    href="/">Consultar calificaciones</a>
                             @endcan
 
 
                             @can('calificaciondocentes')
-                                <a class="dropdown-item" href="/docente-calif">Modificar Calificaciones</a>
+                                <a class="dropdown-item {{ Route::currentRouteName() === '' ? 'active' : '' }}"
+                                    href="/">Modificar Calificaciones</a>
+                            @endcan
+
+                            @can('inscripcion')
+                                <a class="dropdown-item {{ Route::currentRouteName() === 'inscripcion.actualizado' ? 'active' : '' }}"
+                                    href="{{ route('inscripcion.actualizado') }}">Inscripcion</a>
                             @endcan
 
                             @can('adeudo')
                                 <a class="dropdown-item {{ Route::currentRouteName() === 'adeudo.actualizado' ? 'active' : '' }}"
-                                    href="/adeudo">Adeudos</a>
+                                    href="{{ route('adeudo.actualizado') }}">Adeudos</a>
                             @endcan
                         </div>
                     </li>
@@ -83,21 +90,20 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administración</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown07">
                                 @can('plan-estudio')
-                                    <a class="dropdown-item" href="/plan-estudio">Plan de Estudio</a>
+                                    <a class="dropdown-item {{ Route::currentRouteName() === 'plan.actualizado' ? 'active' : '' }}"
+                                        href="{{ route('plan.actualizado') }}">Plan de Estudio</a>
                                 @endcan
                                 @can('modulo')
-                                    <a class="dropdown-item" href="/modulo">Modulo</a>
+                                    <a class="dropdown-item {{ Route::currentRouteName() === 'modulo.actualizado' ? 'active' : '' }}"
+                                        href="{{ route('modulo.actualizado') }}">Modulo</a>
                                 @endcan
 
                                 @can('grupo')
-                                    <a class="dropdown-item" href="/grupo">Grupo</a>
+                                    <a class="dropdown-item {{ Route::currentRouteName() === 'grupo.actualizado' ? 'active' : '' }}"
+                                        href="{{ route('grupo.actualizado') }}">Grupo</a>
                                 @endcan
-                                @can('inscripcion')
-                                    <a class="dropdown-item" href="/inscripcion">Inscripcion</a>
-                                @endcan
-                                @can('calificacion')
-                                    <a class="dropdown-item" href="/calificacion2">Calificacion</a>
-                                @endcan
+
+
                             </div>
                         </li>
                     @endcan

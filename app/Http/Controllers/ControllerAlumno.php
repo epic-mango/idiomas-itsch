@@ -73,9 +73,9 @@ class ControllerAlumno extends Controller
               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                     [
                         $informacion->ID_ALUMNO,
+                        $informacion->ALUMNO_NOMBRE,
                         $informacion->ALUMNO_APELLIDO_PAT,
                         $informacion->ALUMNO_APELLIDO_MAT,
-                        $informacion->ALUMNO_NOMBRE,
                         $informacion->ALUMNO_SEXO,
                         $informacion->ALUMNO_TIPO_SANGRE,
                         $informacion->ALUMNO_FECHA_NAC,

@@ -25,9 +25,9 @@ class ValidaAlumno extends FormRequest
     {
         return [
             'ID_ALUMNO' => 'required|max:15',
+            'ALUMNO_NOMBRE' => 'required|max:30',
             'ALUMNO_APELLIDO_PAT' => 'required|max:30',
             'ALUMNO_APELLIDO_MAT' => 'max:30',
-            'ALUMNO_NOMBRE' => 'required|max:30',
             'ALUMNO_SEXO' => 'required',
             'ALUMNO_TIPO_SANGRE' => 'max:5',
             'ALUMNO_FECHA_NAC' => 'required|date',
