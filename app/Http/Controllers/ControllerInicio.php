@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 
 class ControllerInicio extends Controller
@@ -11,12 +12,28 @@ class ControllerInicio extends Controller
         //Verificar si el usuario está autenticado
         if (Auth::check()) {
             //si está autenticado, mostrar la vista
-            return redirect('/home');
+
+            switch (Auth::user()->roles[0]->name) {
+                case 'Admin':
+                    return redirect()->route('admin.actualizado');
+                    break;
+                case 'Docente':
+                    return redirect()->route('home');
+                    break;
+                case 'Alumno':
+                    return redirect()->route('home');
+                    break;
+                case 'Secretaria':
+                    return redirect()->route('home');
+                    break;
+                default:
+                    return redirect()->route('home');
+                    break;
+            }
         } else {
             //si no está autenticado, mostrar el formulario de login
             return view('auth/login');
         }
-        
     }
 
 

@@ -7,6 +7,7 @@ use App\Models\Administrador;
 use App\Models\Alumno;
 use App\Models\Docente;
 use App\Models\Secretaria;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -84,6 +85,10 @@ class ControllerSecretaria extends Controller
                     ]
 
                 );
+
+                $user = User::find($informacion->ADMIN_CORREO);
+                $user->syncRoles(['Secre']);
+
                 return back();
             }
         }
@@ -177,12 +182,13 @@ class ControllerSecretaria extends Controller
 
     public function eliminarsecre($id)
     {
+        $id_user = DB::table('secretarias')->join('users', 'users.id', '=', 'secretarias.SECRETARIA_CORREO')->where('ID_SECRETARIAL', '=', $id)->first('users.id');
+        $user = User::find($id_user->id);
+        $user->syncRoles(['Alum']);
+
         //Eliminamos la informacion de la Id mandada
         DB::table('secretarias')->where('ID_SECRETARIAL', '=', $id)->delete();
-
-
-
-
+        
         return redirect()->route('secre.actualizado');
     }
 }

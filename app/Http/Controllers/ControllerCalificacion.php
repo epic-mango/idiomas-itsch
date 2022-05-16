@@ -20,7 +20,7 @@ class ControllerCalificacion extends Controller
         $seleccalificacion = DB::table('calificacions')
             ->join('alumnos', 'alumnos.ID_ALUMNO', '=', 'calificacions.CALIFICACION_ID_ALUMNO')
             ->join('docentes',  'docentes.ID_DOCENTE', '=', 'calificacions.CALIFICACION_ID_DOCENTE')
-            ->join('grupos',  'grupos.ID_GRUPO_NOMBRE', '=', 'calificacions.CALIFICACION_ID_GRUPO_NOMBRE')
+            ->join('grupos',  'grupos.ID_GRUPO', '=', 'calificacions.CALIFICACION_ID_GRUPO_NOMBRE')
             ->select('docentes.*', 'grupos.*', 'alumnos.*', 'calificacions.*')->get();
 
         $selecalum = Alumno::select(
@@ -132,19 +132,7 @@ class ControllerCalificacion extends Controller
     public function modificarcalificacion(Request $informacion, $id)
 
     {
-
-
-
-
-
-
-
         $selecalum = Calificacion::where('ID_CALIFICACION', $id)->update([
-
-
-
-
-
             'CALIFICACION_ID_ALUMNO' => $informacion->CALIFICACION_ID_ALUMNO,
             'CALIFICACION_ID_GRUPO_NOMBRE' => $informacion->CALIFICACION_ID_GRUPO_NOMBRE,
             'CALIFICACION_ID_PLANESTUDIO' => $informacion->CALIFICACION_ID_PLANESTUDIO,
@@ -156,30 +144,14 @@ class ControllerCalificacion extends Controller
             'P3' => $informacion->P3,
             'P4' => $informacion->P4,
             'PF' => $informacion->PF,
-
-
-
-
         ]);
-
-
-
-
-
-
 
         return redirect()->route('calificacion.actualizado');
     }
 
-
-
     public function eliminarcalificacion($id)
     {
-
         DB::table('calificacions')->where('ID_CALIFICACION', '=', $id)->delete();
-
-
-
 
         return redirect()->route('calificacion.actualizado');
     }

@@ -14,6 +14,7 @@ class DocentesTest extends TestCase
     public function test_docentes_page()
     {
 
+        $this->get("/docente")->assertForbidden();
         //Alguien externo no debería poder ver la página
         $this->get("/docente")->assertForbidden();
 
@@ -30,11 +31,12 @@ class DocentesTest extends TestCase
             'password' => '1234567890',
         ]);
 
-        //Verificar que se le dio el Rol de DOCENTE al DOCENTEistrador
+        //Verificar que se le dio el Rol de Admin al Administrador
         $this->assertTrue($user->hasRole('Admin'));
 
-        //Un DOCENTEistrador debe poder ver la página
-        $this->actingAs($user)->get("/docente")->assertSee("Consulta de Docente");
+        //Un Administrador debe poder ver la página
+        $this->actingAs($user)->get("/docente")->assertSee("Lista de Docentes");
+        
     }
 
     public function test_alumno_cant_add_docente()
@@ -108,8 +110,8 @@ class DocentesTest extends TestCase
 
     public function test_admin_can_add_docente()
     {
-        //Desactivar el ocultar los errores
-        // $this->withoutExceptionHandling();
+        // Desactivar el ocultar los errores
+        $this->withoutExceptionHandling();
 
 
         //Agregar un nuevo admin
@@ -172,6 +174,8 @@ class DocentesTest extends TestCase
         $docente = User::where('email', 'DocentePrueba@gmail.com')->first();
 
         $this->assertTrue($docente->hasRole('Docente'));
+
+        $this->actingAs($admin)->get('/docente')->assertSee('Pruebas Prohibidio Prohibidencio');
     }
 
     public function test_notlogged_cant_get_docentes()
@@ -254,5 +258,7 @@ class DocentesTest extends TestCase
 
         //Verificar el rol de docente
         $this->assertFalse($docente->hasRole('Docente'));
+
+        $this->actingAs($admin)->get('/docente')->assertDontSee('Pruebas Prohibidio Prohibidencio');
     }
 }

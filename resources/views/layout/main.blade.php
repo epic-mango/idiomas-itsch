@@ -71,7 +71,8 @@
                             @endcan
 
                             @can('adeudo')
-                                <a class="dropdown-item" href="/adeudo">Adeudos</a>
+                                <a class="dropdown-item {{ Route::currentRouteName() === 'adeudo.actualizado' ? 'active' : '' }}"
+                                    href="/adeudo">Adeudos</a>
                             @endcan
                         </div>
                     </li>
@@ -131,14 +132,12 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Cerrar sesión
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
+                                        class="d-none"> @csrf
                                     </form>
                                 </div>
                             </li>

@@ -15,7 +15,7 @@ class ControllerInscripcion extends Controller
     public function mostinscripcion()
     {
         //para llenar tabla
-        $selecinscripcion = DB::table('inscripcions')->join('alumnos', 'alumnos.ID_ALUMNO', '=', 'inscripcions.INSCRIPCION_ID_ALUMNO')
+        $selecinscripcion = DB::table('inscripcions')->join('alumnos', 'alumnos.ID_ALUMNO', '=', 'inscripcions.ISCRIPCION_ID_ALUMNO')
             ->select('inscripcions.*', 'alumnos.*')
             ->get();
 
@@ -26,7 +26,7 @@ class ControllerInscripcion extends Controller
             'ID_ALUMNO',
 
         )->get();
-        $selecgrupo = Grupo::select('ID_GRUPO_NOMBRE')->get();
+        $selecgrupo = Grupo::select('ID_GRUPO')->get();
 
         return view('inscripcion', compact('selecinscripcion', 'selecalum', 'selecgrupo'));
     }
@@ -64,7 +64,7 @@ class ControllerInscripcion extends Controller
 
         $selecinscripcion = DB::table('inscripcions')
             ->join('alumnos', 'alumnos.ID_ALUMNO', '=', 'inscripcions.INSCRIPCION_ID_ALUMNO')
-            ->join('grupos', 'grupos.ID_GRUPO_NOMBRE', '=', 'inscripcions.INSCRIPCION_ID_GRUPO_NOMBRE')
+            ->join('grupos', 'grupos.ID_GRUPO', '=', 'inscripcions.INSCRIPCION_ID_GRUPO')
             ->select('inscripcions.*', 'alumnos.*', 'grupos.*')
             ->where('ID_INSCRIPCION', $id)
             ->get();
@@ -78,8 +78,7 @@ class ControllerInscripcion extends Controller
 
         )->get();
 
-        $selecgrupo = Grupo::select('ID_GRUPO_NOMBRE')->get();
-
+        $selecgrupo = Grupo::select('ID_GRUPO')->get();
         return view('update/inscripcion', compact('selecinscripcion', 'selecalum', 'selecgrupo'));
     }
 

@@ -13,6 +13,7 @@ class AdministradoresTest extends TestCase
 
     public function test_administradores_page()
     {
+        $this->get("/administrativo")->assertForbidden();
 
         //Alguien externo no debería poder ver la página
         $this->get("/administrativo")->assertForbidden();
@@ -34,7 +35,8 @@ class AdministradoresTest extends TestCase
         $this->assertTrue($user->hasRole('Admin'));
 
         //Un administrador debe poder ver la página
-        $this->actingAs($user)->get("/administrativo")->assertSee("Consulta de Admins");
+        $this->actingAs($user)->get("/administrativo")->assertSee("Lista de administradores");
+        
     }
 
 
@@ -165,6 +167,8 @@ class AdministradoresTest extends TestCase
         $user = User::where('email', 'Prueba@gmail.com')->first();
 
         $this->assertTrue($user->hasRole('Admin'));
+
+        $this->actingAs($user)->get('/administrativo')->assertSee('Pruebas Prohibidio Prohibidencio');
     }
 
     public function test_notlogged_cant_get_administrador()
@@ -248,5 +252,7 @@ class AdministradoresTest extends TestCase
 
         $this->assertFalse($user->hasRole('Admin'));
         $this->assertTrue($user->hasRole('Alum'));
+
+        $this->actingAs($user)->get('/administrativo')->assertDontSee('Pruebas Prohibidio Prohibidencio');
     }
 }

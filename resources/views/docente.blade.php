@@ -37,7 +37,7 @@
 
 <!-- Large modal -->
 <div class="container">
-  <h5>Consulta de Docente
+  <h5>Lista de Docentes</h5>
     <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">
 
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus"
