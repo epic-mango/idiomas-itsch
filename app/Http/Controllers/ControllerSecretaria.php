@@ -100,10 +100,10 @@ class ControllerSecretaria extends Controller
 
         //Nos manda el Id a modificar para poder seleccionar su informacion y mandar a nueva ventana
         $selecadmin = Secretaria::where('ID_SECRETARIAL', $id)->get();
+        $correo = User::where('id', $selecadmin[0]->SECRETARIA_CORREO)->get('email')->first()->email;
 
 
-
-        return view('update/secretaria', compact('selecadmin'));
+        return view('update/secretaria', compact('selecadmin', 'correo'));
     }
 
 
@@ -125,24 +125,14 @@ class ControllerSecretaria extends Controller
             'ADMIN_COLONIA' => 'required|max:30',
             'ADMIN_MUNICIPIO' => 'required|max:30',
             'ADMIN_ESTADO' => 'required|max:30',
-
-
             'ADMIN_CLAVE_PROFESIONAL' => 'max:30',
             'ADMIN_ESPECIALIDAD' => 'max:30',
             'ADMIN_FECHA_ING' => 'required|date',
             'ADMIN_OBSERVACIONES' => 'required|max:500',
         ]);
 
-
-
-
-
-
-
-
         $selecalum = DB::table('secretarias')->where('ID_SECRETARIAL', $id)->update([
-
-            'ID_SECRETARIAL' => $id,
+            'ID_SECRETARIAL' => $informacion->ID_SECRETARIAL,
             'SECRETARIA_CLAVE' => $informacion->ADMIN_CLAVE,
             'SECRETARIA_AP_PAT' => $informacion->ADMIN_AP_PAT,
             'SECRETARIA_AP_MAT' => $informacion->ADMIN_AP_MAT,
@@ -156,14 +146,10 @@ class ControllerSecretaria extends Controller
             'SECRETARIA_ESTADO' => $informacion->ADMIN_ESTADO,
             'SECRETARIA_MOVIL' => $informacion->ADMIN_MOVIL,
             'SECRETARIA_CASA' => $informacion->ADMIN_CASA,
-
             'SECRETARIA_CLAVE_PROFESIONAL' => $informacion->ADMIN_CLAVE_PROFESIONAL,
             'SECRETARIA_ESPECIALIDAD' => $informacion->ADMIN_ESPECIALIDAD,
             'SECRETARIA_FECHA_ING' => $informacion->ADMIN_FECHA_ING,
             'SECRETARIA_OBSERVACIONES' => $informacion->ADMIN_OBSERVACIONES,
-
-
-
         ]);
         return redirect()->route('secre.actualizado');
     }
@@ -188,7 +174,7 @@ class ControllerSecretaria extends Controller
 
         //Eliminamos la informacion de la Id mandada
         DB::table('secretarias')->where('ID_SECRETARIAL', '=', $id)->delete();
-        
+
         return redirect()->route('secre.actualizado');
     }
 }

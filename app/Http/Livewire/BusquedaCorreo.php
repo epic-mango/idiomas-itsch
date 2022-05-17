@@ -30,6 +30,7 @@ class BusquedaCorreo extends Component
         if (strlen($this->busqueda) > 0) {
             //Además de buscar usuarios que coincidan con la entrada del usuario, se buscan usuarios que coincidan con el rol 'Alum'
             $this->resultado = User::where('email', 'like', '%' . $this->busqueda . '%')->role('Alum')->get();
+            dd($this->resultado);
         }
     }
 

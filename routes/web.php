@@ -73,14 +73,14 @@ Route::get('/docente/{id_alu}', 'App\Http\Controllers\ControllerDocente@eliminar
 
 //      CRUD ALUMNOS
 //C
-Route::post('/alumno', 'App\Http\Controllers\ControllerAlumno@agregaalumno')->name('insert.agregar-alumno');
+Route::post('/alumnos', 'App\Http\Controllers\ControllerAlumno@agregaalumno')->name('insert.agregar-alumno');
 //R
-Route::get('/alumno', 'App\Http\Controllers\ControllerAlumno@mostalumno')->name('alumno.actualizado');
+Route::get('/alumnos', 'App\Http\Controllers\ControllerAlumno@mostalumno')->name('alumno.actualizado');
 //U
-Route::get('/update/alumno/{id_alu}', 'App\Http\Controllers\ControllerAlumno@edit')->name('update.mostalumno_modificar');
-Route::patch('/update/alumno/{id_alu}', 'App\Http\Controllers\ControllerAlumno@modificaralumno')->name('update.modoficar-alumno');
+Route::get('/update/alumnos/{id_alu}', 'App\Http\Controllers\ControllerAlumno@edit')->name('update.mostalumno_modificar');
+Route::patch('/update/alumnos/{id_alu}', 'App\Http\Controllers\ControllerAlumno@modificaralumno')->name('update.modoficar-alumno');
 //D
-Route::get('/alumno/{id_alu}', 'App\Http\Controllers\ControllerAlumno@eliminaralumno')->name('delete.alumno_eliminar');
+Route::get('/alumnos/{id_alu}', 'App\Http\Controllers\ControllerAlumno@eliminaralumno')->name('delete.alumno_eliminar');
 
 
 

@@ -44,7 +44,7 @@
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
 
-            <h5>Consulta de Alumno
+            <h5>Lista de Alumnos
 
 
                 <!-- Large modal Boton Agregar Alumno -->

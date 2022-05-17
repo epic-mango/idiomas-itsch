@@ -88,9 +88,10 @@ class ControllerDocente extends Controller
 
         $selecdocente = Docente::where('ID_DOCENTE', $id)->get();
 
+        $correo = User::where('id', $selecdocente[0]->DOCENTE_CORREO)->get('email')->first()->email;
 
 
-        return view('update/docente', compact('selecdocente'));
+        return view('update/docente', compact('selecdocente', 'correo'));
     }
 
 
@@ -102,8 +103,6 @@ class ControllerDocente extends Controller
 
         //Validamos que los campos sean correctos
         $informacion->validate([
-
-
             'DOCENTE_CLAVE' => 'required|max:30',
             'DOCENTE_AP_PAT' => 'required|max:30',
             'DOCENTE_AP_MAT' => 'max:30',
@@ -115,8 +114,6 @@ class ControllerDocente extends Controller
             'DOCENTE_COLONIA' => 'required|max:30',
             'DOCENTE_MUNICIPIO' => 'required|max:30',
             'DOCENTE_ESTADO' => 'required|max:30',
-
-
             'DOCENTE_GRADO_ESCOLAR' => 'max:30',
             'DOCENTE_ESPECIALIDAD' => 'max:30',
             'DOCENTE_FECHA_ING' => 'required|date',
@@ -128,11 +125,7 @@ class ControllerDocente extends Controller
 
 
         $selecalum = DB::table('docentes')->where('ID_DOCENTE', $id)->update([
-
-
-
-
-            'ID_DOCENTE' => $id,
+            'ID_DOCENTE' => $informacion->ID_DOCENTE,
             'DOCENTE_CLAVE' =>  $informacion->DOCENTE_CLAVE,
             'DOCENTE_AP_PAT' =>  $informacion->DOCENTE_AP_PAT,
             'DOCENTE_AP_MAT' =>  $informacion->DOCENTE_AP_MAT,
@@ -146,7 +139,6 @@ class ControllerDocente extends Controller
             'DOCENTE_ESTADO' =>  $informacion->DOCENTE_ESTADO,
             'DOCENTE_MOVIL' =>  $informacion->DOCENTE_MOVIL,
             'DOCENTE_CASA' =>  $informacion->DOCENTE_CASA,
-
             'DOCENTE_GRADO_ESCOLAR' =>  $informacion->DOCENTE_GRADO_ESCOLAR,
             'DOCENTE_ESPECIALIDAD' =>  $informacion->DOCENTE_ESPECIALIDAD,
             'DOCENTE_FECHA_ING' =>  $informacion->DOCENTE_FECHA_ING,

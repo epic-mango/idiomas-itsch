@@ -67,10 +67,10 @@ class TestAlumnos extends TestCase
             'ALUMNO_TELEFONO_PER' => '1234567880',
             'ALUMNO_TELEFONO_CASA' => '1234567690',
             'ALUMNO_CORREO' => $user->id,
-            'ALUMNO_TUTOR_AR_PAT'=>'Prohibidio',
-            'ALUMNO_TUTOR_AR_MAT'=>'Probibido',
-            'ALUMNO_TUTOR_NOMBRE'=>'Prr',
-            'ALUMNO_CARRERA'=>'Ing. en Sistemas',
+            'ALUMNO_TUTOR_AR_PAT' => 'Prohibidio',
+            'ALUMNO_TUTOR_AR_MAT' => 'Probibido',
+            'ALUMNO_TUTOR_NOMBRE' => 'Prr',
+            'ALUMNO_CARRERA' => 'Ing. en Sistemas',
             'ALUMNO_OBSERVACIONES' => 'Observaciones',
             'ALUMNO_STATUS' => 'Activo',
         ])->assertForbidden();
@@ -95,10 +95,10 @@ class TestAlumnos extends TestCase
             'ALUMNO_TELEFONO_PER' => '1234567880',
             'ALUMNO_TELEFONO_CASA' => '1234567690',
             'ALUMNO_CORREO' => '1',
-            'ALUMNO_TUTOR_AR_PAT'=>'Prohibidio',
-            'ALUMNO_TUTOR_AR_MAT'=>'Probibido',
-            'ALUMNO_TUTOR_NOMBRE'=>'Prr',
-            'ALUMNO_CARRERA'=>'Ing. en Sistemas',
+            'ALUMNO_TUTOR_AR_PAT' => 'Prohibidio',
+            'ALUMNO_TUTOR_AR_MAT' => 'Probibido',
+            'ALUMNO_TUTOR_NOMBRE' => 'Prr',
+            'ALUMNO_CARRERA' => 'Ing. en Sistemas',
             'ALUMNO_OBSERVACIONES' => 'Observaciones',
             'ALUMNO_STATUS' => 'Activo',
         ])->assertForbidden();
@@ -158,10 +158,10 @@ class TestAlumnos extends TestCase
             'ALUMNO_TELEFONO_PER' => '1234567880',
             'ALUMNO_TELEFONO_CASA' => '1234567690',
             'ALUMNO_CORREO' => $alumno->id,
-            'ALUMNO_TUTOR_AR_PAT'=>'Prohibidio',
-            'ALUMNO_TUTOR_AR_MAT'=>'Probibido',
-            'ALUMNO_TUTOR_NOMBRE'=>'Prr',
-            'ALUMNO_CARRERA'=>'Ing. en Sistemas',
+            'ALUMNO_TUTOR_AR_PAT' => 'Prohibidio',
+            'ALUMNO_TUTOR_AR_MAT' => 'Probibido',
+            'ALUMNO_TUTOR_NOMBRE' => 'Prr',
+            'ALUMNO_CARRERA' => 'Ing. en Sistemas',
             'ALUMNO_OBSERVACIONES' => 'Observaciones',
             'ALUMNO_STATUS' => 'Activo',
         ])->assertRedirect();
@@ -181,7 +181,7 @@ class TestAlumnos extends TestCase
         $this->get(route('alumno.actualizado'))->assertForbidden();
     }
 
-    public function test_delete_alumno_to_alumno()
+    public function test_delete_alumno()
     {
         //Desactivar el ocultar los errores
         $this->withoutExceptionHandling();
@@ -241,6 +241,7 @@ class TestAlumnos extends TestCase
             'ADMIN_OBSERVACIONES' => 'Nada',
         ])->assertRedirect();
 
+        
 
         //Actualizar el objeto alumno
         $alumno = User::where('email', 'DocentePrueba@gmail.com')->first();

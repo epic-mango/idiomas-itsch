@@ -8,6 +8,7 @@ use App\Models\Administrador;
 use App\Models\Alumno;
 use App\Models\Docente;
 use App\Models\Secretaria;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,9 +23,10 @@ class ControllerAlumno extends Controller
         $selecalumno = Alumno::where('ID_ALUMNO', $id)->get();
 
 
+        $correo = User::where('id', $selecalumno[0]->ALUMNO_CORREO)->get('email')->first()->email;
 
 
-        return view('update/alumno', compact('selecalumno'));
+        return view('update/alumno', compact('selecalumno', 'correo'));
     }
 
     public function mostalumno()
@@ -130,22 +132,15 @@ class ControllerAlumno extends Controller
             'ALUMNO_COLONIA' => 'required|max:30',
             'ALUMNO_MUNICIPIO' => 'required|max:30',
             'ALUMNO_ESTADO' => 'required|max:30',
-
             'ALUMNO_CARRERA' => 'required|max:30',
             'ALUMNO_OBSERVACIONES' => 'max:500',
             'ALUMNO_STATUS' => 'required|max:20',
             'ALUMNO_ING_ANIO' => 'required|min:1',
         ]);
 
-
-
-
         if ($informacion->ID_ALUMNO == $id) {
             $selecalum = DB::table('alumnos')->where('ID_ALUMNO', $id)->update([
-
-
-
-                'ID_ALUMNO' => $id,
+                'ID_ALUMNO' => $informacion->ID_ALUMNO,
                 'ALUMNO_APELLIDO_PAT' => $informacion->ALUMNO_APELLIDO_PAT,
                 'ALUMNO_APELLIDO_MAT' => $informacion->ALUMNO_APELLIDO_MAT,
                 'ALUMNO_NOMBRE' => $informacion->ALUMNO_NOMBRE,
@@ -158,7 +153,6 @@ class ControllerAlumno extends Controller
                 'ALUMNO_ESTADO' => $informacion->ALUMNO_ESTADO,
                 'ALUMNO_TELEFONO_PER' => $informacion->ALUMNO_TELEFONO_PER,
                 'ALUMNO_TELEFONO_CASA' => $informacion->ALUMNO_TELEFONO_CASA,
-
                 'ALUMNO_TUTOR_AR_PAT' => $informacion->ALUMNO_TUTOR_AR_PAT,
                 'ALUMNO_TUTOR_AR_MAT' => $informacion->ALUMNO_TUTOR_AR_MAT,
                 'ALUMNO_TUTOR_NOMBRE' => $informacion->ALUMNO_TUTOR_NOMBRE,
@@ -166,10 +160,6 @@ class ControllerAlumno extends Controller
                 'ALUMNO_OBSERVACIONES' => $informacion->ALUMNO_OBSERVACIONES,
                 'ALUMNO_STATUS' => $informacion->ALUMNO_STATUS,
                 'ALUMNO_ING_ANIO' => $informacion->ALUMNO_ING_ANIO,
-
-
-
-
             ]);
 
             return redirect()->route('alumno.actualizado');
@@ -181,10 +171,7 @@ class ControllerAlumno extends Controller
                 return back();
             } else {
                 $selecalum = DB::table('alumnos')->where('ID_ALUMNO', $id)->update([
-
-
-
-                    'ID_ALUMNO' => $informacion->ID_ALUMNO,
+                    'ID_ALUMNO' =>  $informacion->ID_ALUMNO,
                     'ALUMNO_APELLIDO_PAT' => $informacion->ALUMNO_APELLIDO_PAT,
                     'ALUMNO_APELLIDO_MAT' => $informacion->ALUMNO_APELLIDO_MAT,
                     'ALUMNO_NOMBRE' => $informacion->ALUMNO_NOMBRE,
@@ -197,7 +184,6 @@ class ControllerAlumno extends Controller
                     'ALUMNO_ESTADO' => $informacion->ALUMNO_ESTADO,
                     'ALUMNO_TELEFONO_PER' => $informacion->ALUMNO_TELEFONO_PER,
                     'ALUMNO_TELEFONO_CASA' => $informacion->ALUMNO_TELEFONO_CASA,
-
                     'ALUMNO_TUTOR_AR_PAT' => $informacion->ALUMNO_TUTOR_AR_PAT,
                     'ALUMNO_TUTOR_AR_MAT' => $informacion->ALUMNO_TUTOR_AR_MAT,
                     'ALUMNO_TUTOR_NOMBRE' => $informacion->ALUMNO_TUTOR_NOMBRE,
@@ -210,6 +196,7 @@ class ControllerAlumno extends Controller
 
 
                 ]);
+                return redirect()->route('alumno.actualizado');
             }
         }
     }

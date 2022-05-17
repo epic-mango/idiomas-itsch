@@ -87,7 +87,8 @@ class ControllerAdministrador extends Controller
     {
         //Nos manda el Id a modificar para poder seleccionar su informacion y mandar a nueva ventana
         $selecadmin = Administrador::where('ID_ADMIN', $id)->get();
-        return view('update/administrador', compact('selecadmin'));
+        $correo = User::where('id', $selecadmin[0]->ADMIN_CORREO)->get('email')->first()->email;
+        return view('update/administrador', compact('selecadmin', 'correo'));
     }
 
     public function modificaradmin(Request $informacion, $id)
@@ -112,7 +113,7 @@ class ControllerAdministrador extends Controller
         ]);
 
         $selecalum = DB::table('administradors')->where('ID_ADMIN', $id)->update([
-            'ID_ADMIN' => $id,
+            'ID_ADMIN' => $informacion->ADMIN_ID,
             'ADMIN_CLAVE' => $informacion->ADMIN_CLAVE,
             'ADMIN_AP_PAT' => $informacion->ADMIN_AP_PAT,
             'ADMIN_AP_MAT' => $informacion->ADMIN_AP_MAT,
@@ -126,7 +127,6 @@ class ControllerAdministrador extends Controller
             'ADMIN_ESTADO' => $informacion->ADMIN_ESTADO,
             'ADMIN_MOVIL' => $informacion->ADMIN_MOVIL,
             'ADMIN_CASA' => $informacion->ADMIN_CASA,
-
             'ADMIN_CLAVE_PROFESIONAL' => $informacion->ADMIN_CLAVE_PROFESIONAL,
             'ADMIN_ESPECIALIDAD' => $informacion->ADMIN_ESPECIALIDAD,
             'ADMIN_FECHA_ING' => $informacion->ADMIN_FECHA_ING,

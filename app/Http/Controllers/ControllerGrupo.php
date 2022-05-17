@@ -26,13 +26,12 @@ class ControllerGrupo extends Controller
             'DOCENTE_AP_PAT',
 
         )->get();
-        $selecubicacion = Ubicacion::select('ID_UBICACION')->get();
-        $selecplan = DB::table('plan_estudios')->get();
+        $selecplan = DB::table('planestudios')->get();
         $selecmod = Modulo::select('ID_MODULO')->get();
 
 
 
-        return view('grupo', compact('selecgrup', 'selecplan', 'selecdocente', 'selecubicacion', 'selecmod'));
+        return view('grupo', compact('selecgrup', 'selecplan', 'selecdocente', 'selecmod'));
     }
 
     public function agregagrupo(ValidaGrupo $informacion)
@@ -120,7 +119,6 @@ class ControllerGrupo extends Controller
             'DOCENTE_AP_PAT', 
 
         )->get();
-        $selecubicacion = Ubicacion::select('ID_UBICACION')->get();
         $selecplan = DB::table('plan_estudios')->get();
         $selecmod = Modulo::select('ID_MODULO')->get();
 

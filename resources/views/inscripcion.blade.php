@@ -10,7 +10,7 @@
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
 
-            <h5>Consulta de Inscripcion
+            <h5>Consulta de Inscripción
 
 
                 <!-- Large modal Boton Agregar Inscripcion -->
@@ -25,7 +25,7 @@
                         <path fill-rule="evenodd"
                             d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
                     </svg>
-                    Agregar Iscripcion
+                    Agregar
 
                 </button>
 
@@ -238,7 +238,7 @@
 
 
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">INS_PER:</label>
+                            <label for="exampleFormControlInput1">Periodo:</label>
                             <input type="text" name="INS_PER" pattern="[a-zZ-A]{1,8}" maxlength="8"
                                 class="form-control form-control-sm" placeholder="INS_PER" value="{{ old('INS_PER') }}"
                                 required>
@@ -247,7 +247,7 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">INS_AN:</label>
+                            <label for="exampleFormControlInput1">Año:</label>
                             <input name="INS_AN" value="{{ old('	INS_AN') }}" type="tel" maxlength="4"
                                 pattern="[0-9]{1,4}" class="form-control form-control-sm" placeholder="INS_AN" required>
                             {!! $errors->first('INS_AN','<span class="alert-danger">:message</span><br>') !!}

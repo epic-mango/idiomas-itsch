@@ -37,8 +37,8 @@ class ControllerInscripcion extends Controller
         DB::insert(
 
             'INSERT INTO `inscripcions`
-             (`ID_INSCRIPCION`, `INSCRIPCION_ID_ALUMNO`, `INSCRIPCION_ID_GRUPO_NOMBRE`, `INSCRIPCION_NUM_FOLIO`,
-              `INSCRIPCION_MONTO`, `ISCRIPCION_FECHA`, `INS_PER`, `INS_AN`) 
+             (`ID_INSCRIPCION`, `ISCRIPCION_ID_ALUMNO`, `INSCRIPCION_ID_GRUPO`, `INSCRIPCION_NUM_FOLIO`,
+              `INSCRIPCION_MONTO`, `ISCRIPCION_FECHA`, `ISCRIPCION_ PERIODO`, `INSCRIPCION_ANIO`) 
               VALUES (?,?,?,?,?,?,?,?)',
             [
                 $informacion->ID_INSCRIPCION,

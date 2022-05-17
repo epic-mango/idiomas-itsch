@@ -62,14 +62,14 @@
                             @endcan
 
                             @can('cardex2')
-                                <a class="dropdown-item {{ Route::currentRouteName() === '' ? 'active' : '' }}"
-                                    href="/">Consultar calificaciones</a>
+                                <a class="dropdown-item {{ Route::currentRouteName() === 'calificaciones' ? 'active' : '' }}"
+                                    href="/calificaciones/grupo">Consultar calificaciones</a>
                             @endcan
 
 
                             @can('calificaciondocentes')
                                 <a class="dropdown-item {{ Route::currentRouteName() === '' ? 'active' : '' }}"
-                                    href="/">Modificar Calificaciones</a>
+                                    href="/calificaciones/modificar">Modificar Calificaciones</a>
                             @endcan
 
                             @can('inscripcion')

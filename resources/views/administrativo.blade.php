@@ -344,7 +344,7 @@
                                     </div>
                                     <div class="col-sm">
                                         <div class="form-group">
-                                            <label for="buscaremail">Email address</label>
+                                            <label for="buscaremail">Correo Electrónico</label>
                                             
                                            @livewire('busqueda-correo', ['nombre'=>'ADMIN_CORREO'])
                                            
