@@ -36,12 +36,9 @@ class ControllerGrupo extends Controller
 
     public function agregagrupo(ValidaGrupo $informacion)
     {
-
-
-
         DB::insert(
             'INSERT INTO `grupos` 
-        (`ID_GRUPO_NOMBRE`, `GRUPO_ID_PLANESTUDIO`, `GRUPO_ID_MODULO`, `GRUPO_SEMESTRE`, `GRUPO_TIPO`, `GRUPO_NUM_ALUMNOS`,
+        (`ID_GRUPO`, `GRUPO_ID_PLANESTUDIO`, `GRUPO_ID_MODULO`, `GRUPO_SEMESTRE`, `GRUPO_TIPO`, `GRUPO_NUM_ALUMNOS`,
          `GRUPO_ID_DOCENTE`, `GRUPO_ID_UBICACION`, `GRUPO_DIA`, `GRUPO_HORA_IN`, `GRUPO_HORA_FIN`, `GRUPO_HORA_TOTAL`, `GRU_LIM`, 
          `GRU_HLU`, `GRU_ALU`, `GRU_HMA`, `GRU_AMA`, `GRU_HMI`, `GRU_AMI`, `GRU_HJU`, `GRU_AJU`, `GRU_HVI`, `GRU_AVI`, `GRU_HSA`, 
          `GRU_ASA`, `GRU_DES`) 
@@ -116,7 +113,7 @@ class ControllerGrupo extends Controller
             'ID_DOCENTE',
             'DOCENTE_NOMBRE',
             'DOCENTE_AP_MAT',
-            'DOCENTE_AP_PAT', 
+            'DOCENTE_AP_PAT',
 
         )->get();
         $selecplan = DB::table('plan_estudios')->get();

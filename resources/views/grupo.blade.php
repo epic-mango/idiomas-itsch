@@ -151,11 +151,7 @@
                                         <input type="text" name="ID_GRUPO_NOMBRE" value="{{ old('ID_GRUPO_NOMBRE') }}"
                                             pattern="[A-Zz-a]{1,30}" class="form-control form-control-sm" maxlength="30"
                                             placeholder="ID" required>
-                                        {!! $errors->first(
-    'ID_GRUPO_NOMBRE',
-    '<span
-                                        class="alert-danger">:message</span><br>',
-) !!}
+                                        {!! $errors->first('ID_GRUPO_NOMBRE', '<span class="alert-danger">:message</span><br>') !!}
 
                                     </div>
 
