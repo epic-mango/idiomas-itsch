@@ -8,10 +8,31 @@ use App\Models\Docente;
 use App\Models\Grupo;
 use App\Models\Modulo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ControllerCalificacion extends Controller
 {
+
+    public function modificarCalificacion($idGrupo = null)
+    {
+
+        if ($idGrupo == null) {
+        } else {
+        }
+
+
+        if (Auth::user()->getRoleNames()[0] === 'Docente') {
+
+            $idDocente = Docente::where('DOCENTE_CORREO', Auth::user()->id)->get('ID_DOCENTE')->first();
+
+            $listaGrupos = Grupo::where('GRUPO_ID_DOCENTE', $idDocente->ID_DOCENTE)->get('ID_GRUPO');
+        } else if (Auth::user()->getRoleNames()[0] === 'Admin') {
+            $listaGrupos = Grupo::all();
+        }
+
+        return view('docente-calif');
+    }
 
     public function mostcalificacion()
     {
@@ -43,6 +64,7 @@ class ControllerCalificacion extends Controller
 
         return view('calificacion', compact('seleccalificacion', 'selecmodulo', 'selecplan', 'selecalum', 'selecgrupo', 'selecdocente'));
     }
+
 
 
 
@@ -125,28 +147,6 @@ class ControllerCalificacion extends Controller
         )->get();
 
         return view('update/calificacion', compact('seleccalificacion', 'selecmodulo', 'selecplan', 'selecalum', 'selecgrupo', 'selecdocente'));
-    }
-
-
-
-    public function modificarcalificacion(Request $informacion, $id)
-
-    {
-        $selecalum = Calificacion::where('ID_CALIFICACION', $id)->update([
-            'CALIFICACION_ID_ALUMNO' => $informacion->CALIFICACION_ID_ALUMNO,
-            'CALIFICACION_ID_GRUPO_NOMBRE' => $informacion->CALIFICACION_ID_GRUPO_NOMBRE,
-            'CALIFICACION_ID_PLANESTUDIO' => $informacion->CALIFICACION_ID_PLANESTUDIO,
-            'CALIFICACION_ID_MODULO' => $informacion->CALIFICACION_ID_MODULO,
-            'CALIFICACION_ID_DOCENTE' => $informacion->CALIFICACION_ID_DOCENTE,
-            'CALIFICACION_CLASE' => $informacion->CALIFICACION_CLASE,
-            'P1' => $informacion->P1,
-            'P2' => $informacion->P2,
-            'P3' => $informacion->P3,
-            'P4' => $informacion->P4,
-            'PF' => $informacion->PF,
-        ]);
-
-        return redirect()->route('calificacion.actualizado');
     }
 
     public function eliminarcalificacion($id)

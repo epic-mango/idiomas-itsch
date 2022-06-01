@@ -90,23 +90,18 @@ class ControllerGrupo extends Controller
 
         $selecgrupo = DB::table('grupos')
             ->join('docentes',  'docentes.ID_DOCENTE', '=', 'grupos.GRUPO_ID_DOCENTE')
-            ->join('plan_estudios',  'plan_estudios.ID_PLANESTUDIO', '=', 'grupos.GRUPO_ID_PLANESTUDIO')
             ->join('modulos',  'modulos.ID_MODULO', '=', 'grupos.GRUPO_ID_MODULO')
-            ->join('ubicacions',  'ubicacions.ID_UBICACION', '=', 'grupos.GRUPO_ID_UBICACION')
             ->select(
 
                 'docentes.*',
 
 
                 'grupos.*',
-
-                'plan_estudios.*',
                 'modulos.*',
-                'ubicacions.*',
 
 
 
-            )->where('ID_GRUPO_NOMBRE', '=', $id)->get();
+            )->where('ID_GRUPO', '=', $id)->get();
 
         //Pra llenar lo combo box
         $selecdocente = Docente::select(
@@ -116,12 +111,12 @@ class ControllerGrupo extends Controller
             'DOCENTE_AP_PAT',
 
         )->get();
-        $selecplan = DB::table('plan_estudios')->get();
+        $selecplan = DB::table('planestudios')->get();
         $selecmod = Modulo::select('ID_MODULO')->get();
 
 
 
-        return view('update/grupo', compact('selecgrupo', 'selecplan', 'selecdocente', 'selecubicacion', 'selecmod'));
+        return view('update/grupo', compact('selecgrupo', 'selecplan', 'selecdocente', 'selecmod'));
     }
 
 

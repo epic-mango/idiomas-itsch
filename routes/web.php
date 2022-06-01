@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ControllerAdministrador;
+use App\Http\Controllers\ControllerCalificacion;
 use App\Http\Controllers\ControllerSecretaria;
 use App\Http\Controllers\HomeController;
 
@@ -82,6 +83,9 @@ Route::patch('/update/alumnos/{id_alu}', 'App\Http\Controllers\ControllerAlumno@
 //D
 Route::get('/alumnos/{id_alu}', 'App\Http\Controllers\ControllerAlumno@eliminaralumno')->name('delete.alumno_eliminar');
 
+//      CRUD CALIFICACIONES
+//C
+Route::get('/calificaciones/modificar/{grupo?}', [ControllerCalificacion::class, 'modificarCalificacion'])->name('modificar.calificaciones')->middleware('permission:Admin|Docente');
 
 
 //planestudio

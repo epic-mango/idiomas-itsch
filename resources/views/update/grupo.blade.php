@@ -16,7 +16,7 @@
 
 
         @foreach ($selecgrupo as $informacion )
-        <form action="{{ route('update.modoficar-grupo', $informacion->ID_GRUPO_NOMBRE ) }}" method="POST">
+        <form action="{{ route('update.modoficar-grupo', $informacion->ID_GRUPO ) }}" method="POST">
             @method('PATCH')
             @csrf
             <div class="container">
@@ -27,7 +27,7 @@
                         <div class="col-sm">
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">ID:</label>
-                                <input type="text" name="ID_GRUPO_NOMBRE" value="{{ $informacion->ID_GRUPO_NOMBRE }}"
+                                <input type="text" name="ID_GRUPO_NOMBRE" value="{{ $informacion->ID_GRUPO }}"
                                     pattern="[A-Zz-a]{1,30}" class="form-control form-control-sm" maxlength="30"
                                     placeholder="ID" required disabled>
                                 {!! $errors->first('ID_GRUPO_NOMBRE','<span class="alert-danger">:message</span><br>')
@@ -46,7 +46,7 @@
                                             id="exampleFormControlSelect1" required>
 
 
-                                            <option>{{ $informacion->GRUPO_ID_PLANESTUDIO }}</option>
+                                            <option></option>
 
                                             <?php foreach ($selecplan as $item) {?> <option>
                                                 <?php echo $item->	ID_PLANESTUDIO ; ?> </option>
@@ -86,13 +86,9 @@
                                         <select name="GRUPO_ID_UBICACION" class="form-control form-control-sm"
                                             id="exampleFormControlSelect1" required>
 
-                                            <option>{{$informacion->GRUPO_ID_UBICACION}} </option>
+                                            <option> </option>
 
-                                            <?php foreach ($selecubicacion as $item) {?> <option>
-                                                <?php echo $item->	ID_UBICACION ; ?> </option>
-                                            <?php
-                                                            }//cierro el foreach
-                                                            ?>
+                                          
 
                                         </select>
                                     </div>
@@ -106,7 +102,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Semestre:</label>
                                         <input type="tel" name="GRUPO_SEMESTRE"
-                                            value="{{ $informacion->GRUPO_SEMESTRE }}" pattern="[0-9]{1,11}"
+                                            value="" pattern="[0-9]{1,11}"
                                             maxlength="11" class="form-control form-control-sm" placeholder="Semestre"
                                             required>
                                         {!! $errors->first('GRUPO_SEMESTRE','<span
@@ -154,7 +150,7 @@
                                         <label for="exampleFormControlInput1">Dia:</label>
                                         <input type="tel" name="GRUPO_DIA" pattern="[0-9]{1,11}" maxlength="11"
                                             class="form-control form-control-sm" placeholder="Dia"
-                                            value="{{ $informacion->GRUPO_DIA }}" required>
+                                            value="" required>
                                         {!! $errors->first('GRUPO_DIA','<span class="alert-danger">:message</span><br>')
                                         !!}
 
@@ -196,7 +192,7 @@
                                 <div class="col-sm">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">LIM:</label>
-                                        <input type="tel" name="GRU_LIM" value="{{ $informacion->GRU_LIM }}"
+                                        <input type="tel" name="GRU_LIM" value=""
                                             pattern="[0-9]{1,4}" maxlength="4" class="form-control form-control-sm"
                                             placeholder="LIM Numeros" required>
                                         {!! $errors->first('GRU_LIM','<span class="alert-danger">:message</span><br>')
@@ -207,7 +203,7 @@
                                 <div class="col-sm">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">HLU:</label>
-                                        <input type="text" name="GRU_HLU" value="{{ $informacion->GRU_HLU }}"
+                                        <input type="text" name="GRU_HLU" value=""
                                             pattern="[A-Za-z]{1,5}" maxlength="5" class="form-control form-control-sm"
                                             placeholder="HLU Letras" required>
                                         {!! $errors->first('GRU_HLU','<span class="alert-danger">:message</span><br>')
@@ -224,7 +220,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Hora de Inicio:</label>
                                         <input type="time" name="GRUPO_HORA_IN" class="form-control form-control-sm"
-                                            placeholder="Inicio" value="{{ $informacion->GRUPO_HORA_IN }}" required>
+                                            placeholder="Inicio" value="" required>
                                         {!! $errors->first('GRUPO_HORA_IN','<span
                                             class="alert-danger">:message</span><br>')
                                         !!}
@@ -235,7 +231,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Hora Terminacion:</label>
                                         <input type="time" name="GRUPO_HORA_FIN" class="form-control form-control-sm"
-                                            placeholder="Termino" value="{{ $informacion->GRUPO_HORA_FIN }}">
+                                            placeholder="Termino" value="">
                                         {!! $errors->first('GRUPO_HORA_FIN','<span
                                             class="alert-danger">:message</span><br>')
                                         !!}
@@ -246,7 +242,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Total horas:</label>
                                         <input type="tel" name="GRUPO_HORA_TOTAL"
-                                            value="{{ $informacion->GRUPO_HORA_TOTAL }}" pattern="[0-9]{1,11}"
+                                            value="" pattern="[0-9]{1,11}"
                                             maxlength="11" class="form-control form-control-sm"
                                             placeholder="Total Horas" required>
                                         {!! $errors->first('GRUPO_HORA_TOTAL','<span
@@ -277,7 +273,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">ALU:</label>
-                                        <input type="text" name="GRU_ALU" value="{{ $informacion->GRU_ALU }}"
+                                        <input type="text" name="GRU_ALU" value=""
                                             pattern="[A-Za-z]{1,3}" maxlength="3" class="form-control form-control-sm"
                                             placeholder="ALU" required>
                                         {!! $errors->first('GRU_ALU','<span class="alert-danger">:message</span><br>')
@@ -289,7 +285,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">HMA:</label>
-                                        <input type="text" name="GRU_HMA" value="{{ $informacion->GRU_HMA }}"
+                                        <input type="text" name="GRU_HMA" value=""
                                             pattern="[A-Za-z]{1,5}" maxlength="5" class="form-control form-control-sm"
                                             placeholder="HMA" required>
                                         {!! $errors->first('GRU_HMAE','<span class="alert-danger">:message</span><br>')
@@ -301,7 +297,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">AMA:</label>
-                                        <input type="text" name="GRU_AMA" value="{{ $informacion->GRU_AMA }}"
+                                        <input type="text" name="GRU_AMA" value=""
                                             pattern="[A-Za-z]{1,3}" maxlength="3" class="form-control form-control-sm"
                                             placeholder="AMA" required>
                                         {!! $errors->first('GRU_AMA','<span class="alert-danger">:message</span><br>')
@@ -316,7 +312,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">HMI:</label>
-                                        <input type="text" name="GRU_HMI" value="{{ $informacion->GRU_HMI }}"
+                                        <input type="text" name="GRU_HMI" value=""
                                             pattern="[A-Za-z]{1,5}" maxlength="5" class="form-control form-control-sm"
                                             placeholder="HMI" required>
                                         {!! $errors->first('GRU_HMI','<span class="alert-danger">:message</span><br>')
@@ -328,7 +324,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">AMI:</label>
-                                        <input type="text" name="GRU_AMI" value="{{ $informacion->GRU_AMI }}"
+                                        <input type="text" name="GRU_AMI" value=""
                                             pattern="[A-Za-z]{1,3}" maxlength="3" class="form-control form-control-sm"
                                             placeholder="AMI" required>
                                         {!! $errors->first('GRU_AMI','<span class="alert-danger">:message</span><br>')
@@ -340,7 +336,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">HJU:</label>
-                                        <input type="text" name="GRU_HJU" value="{{ $informacion->GRU_HJU }}"
+                                        <input type="text" name="GRU_HJU" value=""
                                             pattern="[A-Za-z]{1,5}" maxlength="5" class="form-control form-control-sm"
                                             placeholder="HJU" required>
                                         {!! $errors->first('GRU_HJU','<span class="alert-danger">:message</span><br>')
@@ -355,7 +351,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">AJU:</label>
-                                        <input type="text" name="GRU_AJU" value="{{ $informacion->GRU_AJU }}"
+                                        <input type="text" name="GRU_AJU" value=""
                                             pattern="[A-Za-z]{1,3}" maxlength="3" class="form-control form-control-sm"
                                             placeholder="AJU" required>
                                         {!! $errors->first('GRU_AJU','<span class="alert-danger">:message</span><br>')
@@ -367,7 +363,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">HVI:</label>
-                                        <input type="text" name="GRU_HVI" value="{{ $informacion->GRU_HVI }}"
+                                        <input type="text" name="GRU_HVI" value=""
                                             pattern="[A-Za-z]{1,5}" maxlength="5" class="form-control form-control-sm"
                                             placeholder="HVI" required>
                                         {!! $errors->first('GRU_HVI','<span class="alert-danger">:message</span><br>')
@@ -379,7 +375,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">AVI:</label>
-                                        <input type="text" name="GRU_AVI" value="{{ $informacion->GRU_AVI }}"
+                                        <input type="text" name="GRU_AVI" value=""
                                             pattern="[A-Za-z]{1,3}" maxlength="3" class="form-control form-control-sm"
                                             placeholder="AVI" required>
                                         {!! $errors->first('GRU_AVI','<span class="alert-danger">:message</span><br>')
@@ -394,7 +390,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">HSA:</label>
-                                        <input type="text" name="GRU_HSA" value="{{ $informacion->GRU_HSA }}"
+                                        <input type="text" name="GRU_HSA" value=""
                                             pattern="[A-Za-z]{1,3}" maxlength="3" class="form-control form-control-sm"
                                             placeholder="HSA" required>
                                         {!! $errors->first('GRU_HSA','<span class="alert-danger">:message</span><br>')
@@ -406,7 +402,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">ASA:</label>
-                                        <input type="text" name="GRU_ASA" value="{{ $informacion->GRU_ASA }}"
+                                        <input type="text" name="GRU_ASA" value=""
                                             pattern="[A-Za-z]{1,3}" maxlength="3" class="form-control form-control-sm"
                                             placeholder="ASA" required>
                                         {!! $errors->first('GRU_ASA','<span class="alert-danger">:message</span><br>')
@@ -418,7 +414,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">DES:</label>
-                                        <input type="text" name="GRU_DES" value="{{ $informacion->GRU_DES }}"
+                                        <input type="text" name="GRU_DES" value=""
                                             pattern="[A-Za-z]{1,50}" maxlength="50" class="form-control form-control-sm"
                                             placeholder="DES" required>
                                         {!! $errors->first('GRU_DES','<span class="alert-danger">:message</span><br>')

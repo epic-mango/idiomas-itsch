@@ -70,19 +70,19 @@
 
                 @foreach ($selecgrup as $item)
                     <tr>
-                        <td>{{ $item->ID_GRUPO_NOMBRE }} </td>
+                        <td>{{ $item->ID_GRUPO }} </td>
                         <td>
                             {{ $item->DOCENTE_NOMBRE }} {{ $item->DOCENTE_AP_PAT }} {{ $item->DOCENTE_AP_MAT }}
                         </td>
-                        <td>{{ $item->GRUPO_ID_PLANESTUDIO }} </td>
-                        <td>{{ $item->GRUPO_ID_UBICACION }}</td>
+                        <td></td>
+                        <td></td>
 
 
 
                         <td>
                             <center>
                                 <a type="button" class="btn btn-primary "
-                                    href="{{ route('update.mostgrupo_modificar', $item->ID_GRUPO_NOMBRE) }}">
+                                    href="{{ route('update.mostgrupo_modificar', $item->ID_GRUPO) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
@@ -93,7 +93,7 @@
                                     Editar</a>
 
                                 <a type="button" class="btn btn-danger"
-                                    href="{{ route('delete.grupo_eliminar', $item->ID_GRUPO_NOMBRE) }}">
+                                    href="{{ route('delete.grupo_eliminar', $item->ID_GRUPO) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-trash" viewBox="0 0 16 16">
                                         <path
