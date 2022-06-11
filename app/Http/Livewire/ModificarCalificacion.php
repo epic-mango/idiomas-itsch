@@ -12,7 +12,7 @@ class ModificarCalificacion extends Component
     {
         array_push($this->listaAlumnos, 'hola');
     }
-    public $listaGrupos = ['a', 'b', 'c', 'd'];
+    public $listaGrupos;
     public function render()
     {
         return view('livewire.modificar-calificacion');

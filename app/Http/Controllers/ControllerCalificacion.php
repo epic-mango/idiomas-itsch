@@ -9,6 +9,7 @@ use App\Models\Grupo;
 use App\Models\Modulo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class ControllerCalificacion extends Controller
@@ -26,12 +27,15 @@ class ControllerCalificacion extends Controller
 
             $idDocente = Docente::where('DOCENTE_CORREO', Auth::user()->id)->get('ID_DOCENTE')->first();
 
+            dd(Auth::user()->id);
             $listaGrupos = Grupo::where('GRUPO_ID_DOCENTE', $idDocente->ID_DOCENTE)->get('ID_GRUPO');
         } else if (Auth::user()->getRoleNames()[0] === 'Admin') {
             $listaGrupos = Grupo::all();
         }
 
-        return view('docente-calif');
+
+        dd($listaGrupos);
+        return view('docente-calif', compact('listaGrupos'));
     }
 
     public function mostcalificacion()

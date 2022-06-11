@@ -68,10 +68,10 @@ class ControllerDocente extends Controller
                     ]
 
                 );
-            }
 
-            $user = User::find($informacion->DOCENTE_CORREO);
-            $user->syncRoles(['Docente']);
+                $user = User::find($informacion->DOCENTE_CORREO);
+                $user->syncRoles(['Docente']);
+            }
         }
 
 
