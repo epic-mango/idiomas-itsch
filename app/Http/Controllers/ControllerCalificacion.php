@@ -27,14 +27,15 @@ class ControllerCalificacion extends Controller
 
             $idDocente = Docente::where('DOCENTE_CORREO', Auth::user()->id)->get('ID_DOCENTE')->first();
 
-            dd(Auth::user()->id);
             $listaGrupos = Grupo::where('GRUPO_ID_DOCENTE', $idDocente->ID_DOCENTE)->get('ID_GRUPO');
+
+            dd($listaGrupos);
         } else if (Auth::user()->getRoleNames()[0] === 'Admin') {
             $listaGrupos = Grupo::all();
+        } else {
+            abort(403);
         }
 
-
-        dd($listaGrupos);
         return view('docente-calif', compact('listaGrupos'));
     }
 

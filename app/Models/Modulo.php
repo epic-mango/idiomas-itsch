@@ -8,4 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class Modulo extends Model
 {
     use HasFactory;
+
+    //Deshabilitar marcas de tiempo
+    public $timestamps = false;
+
+    //Especificamos el nombre de campo para la llave primaria
+    protected $primaryKey = 'ID_MODULO';
+
+    //Atributos de Modulo asignables en masa
+    protected $fillable = [
+        'RETICULA_NOMBRE',
+        'MODULO_ID_PLANESTUDIO',
+    ];
+
+    //Atributos no asignables en masa
+    protected $guarded = ['ID_MODULO',];
+
+    //Relaciones
+    public function planestudio(){
+        return $this->belongsTo(Planestudio::class, 'MODULO_ID_PLANESTUDIO');
+    }
+
+    public function grupo(){
+        return $this->hasMany(Grupo::class, 'GRUPO_ID_MODULO');
+    }
 }

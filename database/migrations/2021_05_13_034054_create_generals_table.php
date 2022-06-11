@@ -129,6 +129,7 @@ class CreateGeneralsTable extends Migration
             $table->date('PLAN_FIN');
             $table->string('PLAN_ESTADO', 10);
             $table->integer('PLAN_CMOD');
+            
         });
 
 
