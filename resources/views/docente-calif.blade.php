@@ -3,6 +3,6 @@
 
 @section('contenido-main')
 
-@livewire('modificar-calificacion')
+@livewire('modificar-calificacion', ['listaGrupos'=>$listaGrupos, 'grupo'=>$grupo])
 
 @endsection

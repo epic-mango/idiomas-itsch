@@ -186,9 +186,15 @@
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
+            paginacion();
+        });
+        var table;
+        function paginacion(){
+            
 
-            $('#example').DataTable({
+            table = $('#example').DataTable({
                 // "lengthMenu": [[5, 10, 50, 100, -1], [5, 10, 50, 100, "Todo"] ]
+                retriteve: false,
                 "language": {
                     "lengthMenu": "Mostrar " +
                         `<select class= "custom-select custom-select-sm form-control-sm">
@@ -210,7 +216,7 @@
                     }
                 }
             });
-        });
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@master/dist/latest/bootstrap-autocomplete.min.js">
     </script>

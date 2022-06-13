@@ -12,6 +12,9 @@ class Grupo extends Model
     //Deshabilitar marcas de tiempo
     public $timestamps = false;
 
+    //deshabilitar autoincremento
+    public $incrementing = false;
+
     //Especificamos el nombre de campo para la llave primaria
     protected $primaryKey = 'ID_GRUPO';
 
@@ -38,13 +41,24 @@ class Grupo extends Model
     ];
 
     //Relaciones
-    public function modulo(){
+    public function modulo()
+    {
         return $this->belongsTo(Modulo::class, 'GRUPO_ID_MODULO');
     }
 
-    public function docente(){
-        return $this->hasOne(Docente::class, 'GRUPO_ID_DOCENTE');
+    public function docente()
+    {
+        return $this->hasOne(Docente::class, 'ID_DOCENTE', 'GRUPO_ID_DOCENTE');
     }
 
+    //Relación varios a varios a través de la tabla inscripcions
+    public function alumnos()
+    {
+        return $this->belongsToMany(Alumno::class, 'inscripcions', 'INSCRIPCION_ID_GRUPO', 'ISCRIPCION_ID_ALUMNO');
+    }
 
+    public function inscripciones()
+    {
+        return $this->hasMany(Inscripcion::class, 'INSCRIPCION_ID_GRUPO', 'ID_GRUPO');
+    }
 }

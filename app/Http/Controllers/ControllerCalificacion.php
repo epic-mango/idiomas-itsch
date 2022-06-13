@@ -15,12 +15,8 @@ use Illuminate\Support\Facades\DB;
 class ControllerCalificacion extends Controller
 {
 
-    public function modificarCalificacion($idGrupo = null)
+    public function modificarCalificacion($grupo)
     {
-
-        if ($idGrupo == null) {
-        } else {
-        }
 
 
         if (Auth::user()->getRoleNames()[0] === 'Docente') {
@@ -29,14 +25,14 @@ class ControllerCalificacion extends Controller
 
             $listaGrupos = Grupo::where('GRUPO_ID_DOCENTE', $idDocente->ID_DOCENTE)->get('ID_GRUPO');
 
-            dd($listaGrupos);
         } else if (Auth::user()->getRoleNames()[0] === 'Admin') {
             $listaGrupos = Grupo::all();
         } else {
             abort(403);
         }
 
-        return view('docente-calif', compact('listaGrupos'));
+        
+        return view('docente-calif', compact('listaGrupos', 'grupo'));
     }
 
     public function mostcalificacion()
