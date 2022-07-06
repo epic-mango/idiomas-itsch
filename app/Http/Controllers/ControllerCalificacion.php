@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class ControllerCalificacion extends Controller
 {
 
-    public function modificarCalificacion($grupo)
+    public function modificarCalificacion()
     {
 
 
@@ -32,7 +32,7 @@ class ControllerCalificacion extends Controller
         }
 
         
-        return view('docente-calif', compact('listaGrupos', 'grupo'));
+        return view('docente-calif', compact('listaGrupos'));
     }
 
     public function mostcalificacion()

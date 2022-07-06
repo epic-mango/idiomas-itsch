@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Inscripcion extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'ID_INSCRIPCION';
+
+    public $timestamps = false;
 }

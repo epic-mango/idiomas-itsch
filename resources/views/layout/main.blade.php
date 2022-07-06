@@ -17,9 +17,13 @@
 <body class="d-flex flex-column min-vh-100">
     @livewireScripts
     <!--MENU-->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark " style="background-color: #203d4d">
         <div class="container">
-            <a class="navbar-brand" href="#">SAI</a>
+
+            <a class="navbar-brand" href="#">
+                <img src="{{ URL::to('/') }}/image/cle.png" width="30" height="30"
+                    class="d-inline-block align-top" alt="">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
                 aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,7 +31,8 @@
             <div class="collapse navbar-collapse" id="navbarsExample07">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item {{ Route::currentRouteName() === 'home' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('home')}}">Noticias<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ route('home') }}">Noticias<span
+                                class="sr-only">(current)</span></a>
                     </li>
 
                     @can('lv1ylv2')
@@ -189,8 +194,9 @@
             paginacion();
         });
         var table;
-        function paginacion(){
-            
+
+        function paginacion() {
+
 
             table = $('#example').DataTable({
                 // "lengthMenu": [[5, 10, 50, 100, -1], [5, 10, 50, 100, "Todo"] ]

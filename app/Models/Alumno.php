@@ -24,4 +24,6 @@ class Alumno extends Model
     {
         return $this->belongsTo(Grupo::class, 'inscripcions', 'ISCRIPCION_ID_ALUMNO', 'INSCRIPCION_ID_GRUPO');
     }
+
+    
 }
