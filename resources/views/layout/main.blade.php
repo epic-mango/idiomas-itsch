@@ -15,6 +15,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    
     @livewireScripts
     <!--MENU-->
     <nav class="navbar navbar-expand-md navbar-dark " style="background-color: #203d4d">
@@ -106,6 +107,10 @@
                                 @can('grupo')
                                     <a class="dropdown-item {{ Route::currentRouteName() === 'grupo.actualizado' ? 'active' : '' }}"
                                         href="{{ route('grupo.actualizado') }}">Grupo</a>
+                                @endcan
+                                @can('administrativo')
+                                    <a class="dropdown-item {{ Route::currentRouteName() === 'admin.actualizado' ? 'active' : '' }}"
+                                        href="{{ route('admin.actualizado') }}">Periodos</a>
                                 @endcan
 
 

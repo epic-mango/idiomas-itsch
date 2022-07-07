@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Alumno;
+use App\Models\Cierre;
 use App\Models\Grupo;
 use App\Models\Inscripcion;
 use Illuminate\Database\Eloquent\Collection;
@@ -52,6 +53,7 @@ class ModificarCalificacion extends Component
     public $listaAlumnos = [];
     public $listaGrupos = [];
     public $listaCalificaciones = [];
+    public $parcial = -1;
 
     public $grupo = null;
 
@@ -60,6 +62,8 @@ class ModificarCalificacion extends Component
         if ($this->grupo == null) {
             $this->grupo = $this->listaGrupos[0]->ID_GRUPO;
         }
+
+        $this->parcial = Cierre::first()->parcial;
 
         $this->updatedGrupo();
     }
@@ -77,11 +81,10 @@ class ModificarCalificacion extends Component
 
             $lista[$i]->inscripcion = $inscripcion;
 
-            $this->listaCalificaciones[$alumno->ID_ALUMNO] = new stdClass();
-            $this->listaCalificaciones[$alumno->ID_ALUMNO]->P1 = $inscripcion->P1;
-            $this->listaCalificaciones[$alumno->ID_ALUMNO]->P2 = $inscripcion->P2;
-            $this->listaCalificaciones[$alumno->ID_ALUMNO]->P3 = $inscripcion->P3;
-            $this->listaCalificaciones[$alumno->ID_ALUMNO]->P4 = $inscripcion->P4;
+            $this->listaCalificaciones[$alumno->ID_ALUMNO]['P1'] = $inscripcion->P1;
+            $this->listaCalificaciones[$alumno->ID_ALUMNO]['P2'] = $inscripcion->P2;
+            $this->listaCalificaciones[$alumno->ID_ALUMNO]['P3']= $inscripcion->P3;
+            $this->listaCalificaciones[$alumno->ID_ALUMNO]['P4'] = $inscripcion->P4;
         }
         //Guardamos los datos en la lista de alumnos
         $this->listaAlumnos = $lista;
@@ -93,14 +96,32 @@ class ModificarCalificacion extends Component
     {
         $this->validate();
 
-        foreach ($this->listaCalificaciones as $alumno => $calificacion) {
+        if ($this->parcial !== -1) {
+            foreach ($this->listaCalificaciones as $alumno => $calificacion) {
 
-            $inscripcion = Inscripcion::where('ISCRIPCION_ID_ALUMNO', $alumno)->where('INSCRIPCION_ID_GRUPO', $this->grupo)->first();
-            $inscripcion->P1 = $calificacion['P1'];
-            $inscripcion->P2 = $calificacion['P2'];
-            $inscripcion->P3 = $calificacion['P3'];
-            $inscripcion->P4 = $calificacion['P4'];
-            $inscripcion->save();
+                $inscripcion = Inscripcion::where('ISCRIPCION_ID_ALUMNO', $alumno)->where('INSCRIPCION_ID_GRUPO', $this->grupo)->first();
+
+                switch ($this->parcial) {
+                    case 1:
+                        $inscripcion->P1 = $calificacion['P1'];
+                        break;
+                    case 2:
+                        $inscripcion->P2 = $calificacion['P2'];
+                        break;
+                    case 3:
+                        $inscripcion->P3 = $calificacion['P3'];
+                        break;
+                    case 4:
+                        $inscripcion->P4 = $calificacion['P4'];
+                        break;
+                    default:
+
+                        break;
+                }
+
+
+                $inscripcion->save();
+            }
         }
     }
 

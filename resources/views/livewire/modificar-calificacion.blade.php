@@ -38,26 +38,39 @@
                             <th scope="row">{{ $alumno->ALUMNO_NOMBRE }} {{ $alumno->ALUMNO_APELLIDO_PAT }}
                                 {{ $alumno->ALUMNO_APELLIDO_MAT }}</th>
                             <td>{{ $alumno->ID_ALUMNO }}</td>
-                            <td><input wire:model="listaCalificaciones.{{ $alumno->ID_ALUMNO }}.P1"
-                                    name="{{ $alumno->ID_ALUMNO }}-P1" type="number" maxlength="30"
-                                    class="form-control form-control-sm" required>
+                            <td><input wire:model.debounce="listaCalificaciones.{{ $alumno->ID_ALUMNO }}.P1"
+                                    name="{{ $alumno->ID_ALUMNO }}-P1" type="number"
+                                    class="form-control form-control-sm {{ $listaCalificaciones[$alumno->ID_ALUMNO]['P1'] >= 70 ? 'border-success' : 'border-warning' }}"
+                                    required {{ $parcial == 1 ? '' : 'disabled' }}>
                                 @error('listaCalificaciones.' . $alumno->ID_ALUMNO . '.P1')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </td>
-                            <td><input wire:model="listaCalificaciones.{{ $alumno->ID_ALUMNO }}.P2"
-                                    name="{{ $alumno->ID_ALUMNO }}-P2" type="number" maxlength="30"
-                                    class="form-control form-control-sm" required disabled>
+                            <td><input wire:model.debounce="listaCalificaciones.{{ $alumno->ID_ALUMNO }}.P2"
+                                    name="{{ $alumno->ID_ALUMNO }}-P2" type="number"
+                                    class="form-control form-control-sm {{ $listaCalificaciones[$alumno->ID_ALUMNO]['P2'] >= 70 ? 'border-success' : 'border-warning' }}" required
+                                    {{ $parcial == 2 ? '' : 'disabled' }}>
+                                @error('listaCalificaciones.' . $alumno->ID_ALUMNO . '.P2')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
 
                             </td>
-                            <td><input wire:model="listaCalificaciones.{{ $alumno->ID_ALUMNO }}.P3"
-                                    name="{{ $alumno->ID_ALUMNO }}-P3" type="number" maxlength="30"
-                                    class="form-control form-control-sm" required disabled>
-
+                            <td><input wire:model.debounce="listaCalificaciones.{{ $alumno->ID_ALUMNO }}.P3"
+                                    name="{{ $alumno->ID_ALUMNO }}-P3" type="number"
+                                    class="form-control form-control-sm {{ $listaCalificaciones[$alumno->ID_ALUMNO]['P3'] >= 70 ? 'border-success' : 'border-warning' }}" required
+                                    {{ $parcial == 3 ? '' : 'disabled' }}>
+                                @error('listaCalificaciones.' . $alumno->ID_ALUMNO . '.P3')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </td>
-                            <td><input wire:model="listaCalificaciones.{{ $alumno->ID_ALUMNO }}.P4"
-                                    name="{{ $alumno->ID_ALUMNO }}-P3" type="number" maxlength="30"
-                                    class="form-control form-control-sm" required disabled>
+                            <td><input wire:model.debounce="listaCalificaciones.{{ $alumno->ID_ALUMNO }}.P4"
+                                    name="{{ $alumno->ID_ALUMNO }}-P3" type="number"
+                                    class="form-control form-control-sm {{ $listaCalificaciones[$alumno->ID_ALUMNO]['P4'] >= 70 ? 'border-success' : 'border-warning' }}" required
+                                    {{ $parcial == 4 ? '' : 'disabled' }}>
+
+                                @error('listaCalificaciones.' . $alumno->ID_ALUMNO . '.P4')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
 
                             </td>
                         </tr>
@@ -67,9 +80,8 @@
             </table>
 
             <div class="modal-footer">
-                <a type="button" class="btn btn-secondary" data-dismiss="modal"
-                    onclick="table.draw(); alert('');">Cerrar</a>
-                <button type="submit" class="btn btn-success">Modificar</a>
+                
+                <button type="submit" class="btn btn-success" {{ $parcial == -1 ? 'disabled':''  }}>Modificar</a>
             </div>
         </form>
 

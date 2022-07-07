@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Alumno;
 use App\Models\User;
 use Livewire\Component;
 
@@ -28,9 +29,14 @@ class BusquedaCorreo extends Component
         $this->identificador = null;
 
         if (strlen($this->busqueda) > 0) {
-            //Además de buscar usuarios que coincidan con la entrada del usuario, se buscan usuarios que coincidan con el rol 'Alum'
-            $this->resultado = User::where('email', 'like', '%' . $this->busqueda . '%')->role('Alum')->get();
-            dd($this->resultado);
+            //Además de buscar usuarios que coincidan con la entrada del usuario, se buscan usuarios que coincidan con el rol 'Alum',
+            //pero que no estén ya en la lista de alumnos 
+            
+            $resultado = User::leftJoin('alumnos', 'users.id', '=', 'alumnos.ALUMNO_CORREO')->whereNull('alumnos.ALUMNO_CORREO')->where('email', 'like', '%' . $this->busqueda . '%')->role('Alum')->get();
+
+
+            $this->resultado = $resultado;
+           
         }
     }
 

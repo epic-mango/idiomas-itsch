@@ -88,6 +88,10 @@ Route::get('/alumnos/{id_alu}', 'App\Http\Controllers\ControllerAlumno@eliminara
 Route::get('/calificaciones/modificar/{grupo?}', [ControllerCalificacion::class, 'modificarCalificacion'])->name('modificar.calificaciones')->middleware('permission:Admin|Docente');
 
 
+//      PERIODOS
+
+Route::get('/periodos', 'App\Http\Controllers\ControllerPeriodo@mostperiodo')->name('periodo.actualizado')->middleware('permission:Admin');
+
 //planestudio
 Route::get('/update/plan-estudio/{id_alu}', 'App\Http\Controllers\ControllerPlan_Estudio@edit')->name('update.mostplan_modificar');
 Route::patch('/update/plan-estudio/{id_alu}', 'App\Http\Controllers\ControllerPlan_Estudio@modificarplan')->name('update.modoficar-plan');
