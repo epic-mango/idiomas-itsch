@@ -16,7 +16,6 @@
 
 <body class="d-flex flex-column min-vh-100">
     
-    @livewireScripts
     <!--MENU-->
     <nav class="navbar navbar-expand-md navbar-dark " style="background-color: #203d4d">
         <div class="container">
@@ -193,6 +192,7 @@
     <script src="{{ asset('js/dataTables.bootstrap5.min.js') }}"></script>
 
 
+    @livewireScripts
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {

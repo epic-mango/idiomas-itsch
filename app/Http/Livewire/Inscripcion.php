@@ -4,27 +4,34 @@ namespace App\Http\Livewire;
 
 use App\Models\Alumno;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Inscripcion extends Component
 {
+    //Para usar la paginación e indicar el tema 
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+
     public $busqueda;
-    public $listaAlumnos;
+    public $cantidadRegistros;
 
     public function mount()
     {
         $this->busqueda = '';
-        Alumno::chunk(100, function ($alumnos) {
-            foreach ($alumnos as $alumno ) {
-                $this->listaAlumnos[$alumno] = ['ID_ALUMNO'=>$alumno->ID_ALUMNO,
-                'Nombre'=>'Pollo'];
-                dump($alumno );
-            }
-        });
+        $this->cantidadRegistros = 10;
     }
 
 
     public function render()
     {
-        return view('livewire.inscripcion');
+        if ($this->busqueda == '') {
+            $listaAlumnos = Alumno::paginate($this->cantidadRegistros);
+        } else {
+            $listaAlumnos = Alumno::where('ALUMNO_NOMBRE', 'like', '%' . $this->busqueda . '%')->paginate($this->cantidadRegistros);
+        }
+
+
+        return view('livewire.inscripcion', compact('listaAlumnos'));
     }
 }

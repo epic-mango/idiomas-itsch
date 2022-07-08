@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Livewire\WithPagination;
 
 class Alumno extends Model
 {
     use HasFactory;
-
-
+    
     //Eliminar marcas de tiempo
     public $timestamps = false;
 
@@ -24,6 +24,4 @@ class Alumno extends Model
     {
         return $this->belongsTo(Grupo::class, 'inscripcions', 'ISCRIPCION_ID_ALUMNO', 'INSCRIPCION_ID_GRUPO');
     }
-
-    
 }
