@@ -165,7 +165,7 @@
     </nav>
 
     <!--MENU FIN-->
-    <div class="container my-5">
+    <div class="container my-3">
         @yield('contenido-main')
     </div>
     <footer class="bg-light text-center text-lg-start mt-auto">

@@ -15,6 +15,9 @@ class Modulo extends Model
     //Especificamos el nombre de campo para la llave primaria
     protected $primaryKey = 'ID_MODULO';
 
+    //Desactivar autoincrement en PrimaryKey
+    public $incrementing = false;
+
     //Atributos de Modulo asignables en masa
     protected $fillable = [
         'RETICULA_NOMBRE',
@@ -25,11 +28,13 @@ class Modulo extends Model
     protected $guarded = ['ID_MODULO',];
 
     //Relaciones
-    public function planestudio(){
+    public function planestudio()
+    {
         return $this->belongsTo(Planestudio::class, 'MODULO_ID_PLANESTUDIO');
     }
 
-    public function grupo(){
+    public function grupo()
+    {
         return $this->hasMany(Grupo::class, 'GRUPO_ID_MODULO');
     }
 }

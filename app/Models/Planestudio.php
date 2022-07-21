@@ -15,6 +15,9 @@ class Planestudio extends Model
     //Especificamos el nombre de campo para la llave primaria
     protected $primaryKey = 'ID_PLANESTUDIO';
 
+    //Desactivar autoincrement en PrimaryKey
+    public $incrementing = false;
+
     //Atributos de Planestudio asignables en masa
     protected $fillable = [
         'PLAN_CLAVE',

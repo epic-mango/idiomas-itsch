@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 class Alumno extends Model
 {
     use HasFactory;
-    
+
     //Eliminar marcas de tiempo
     public $timestamps = false;
 
@@ -22,6 +22,36 @@ class Alumno extends Model
 
     public function grupos()
     {
-        return $this->belongsTo(Grupo::class, 'inscripcions', 'ISCRIPCION_ID_ALUMNO', 'INSCRIPCION_ID_GRUPO');
+        return $this->belongsToMany(Grupo::class, 'inscripcions', 'ISCRIPCION_ID_ALUMNO', 'INSCRIPCION_ID_GRUPO');
+    }
+
+    public function cardex()
+    {
+        return $this->hasMany(Cardex::class, 'CARDEX_ID_ALUMNO', 'ID_ALUMNO');
+    }
+
+    public function lastCardex()
+    {
+        $modulos = Modulo::join('cardexes', 'modulos.ID_MODULO', '=', 'cardexes.CARDEX_ID_MODULO')
+            ->where('CARDEX_ID_ALUMNO', $this->ID_ALUMNO)
+            ->get();
+        $ultimos = [];
+
+        foreach ($modulos as $modulo) {
+            
+            $actual = intval(str_replace($modulo->MODULO_ID_PLANESTUDIO."_M", '', $modulo->ID_MODULO));
+            
+
+            if (isset($ultimos[$modulo->MODULO_ID_PLANESTUDIO])) {
+                $max = $ultimos[$modulo->MODULO_ID_PLANESTUDIO];
+                if ($actual > $max) {
+                    $ultimos[$modulo->MODULO_ID_PLANESTUDIO] = $actual;
+                }
+            } else {
+                $ultimos[$modulo->MODULO_ID_PLANESTUDIO] = $actual;
+            }
+        }
+
+        return $ultimos;
     }
 }

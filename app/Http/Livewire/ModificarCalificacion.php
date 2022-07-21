@@ -60,7 +60,12 @@ class ModificarCalificacion extends Component
     public function mount()
     {
         if ($this->grupo == null) {
-            $this->grupo = $this->listaGrupos[0]->ID_GRUPO;
+
+            if(sizeof($this->listaGrupos) > 0){
+                $this->grupo = $this->listaGrupos[0]->ID_GRUPO;
+            } else {
+                return;
+            }
         }
 
         $this->parcial = Cierre::first()->parcial;

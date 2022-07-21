@@ -48,27 +48,15 @@
     <table id="example" class="table table-hover table-bordered ">
         <thead class="thead-dark">
             <tr>
-
                 <th>ID Modulo</th>
                 <th>Reticula</th>
-
                 <th>Plan de Estudio</th>
                 <th>Opciones</th>
-
-
-
-
             </tr>
         </thead>
 
         <tbody>
-
-
-
-
             @foreach ($selecmodulo as $item)
-
-
             <tr>
                 <td>{{ $item->ID_MODULO }} </td>
                 <td>
