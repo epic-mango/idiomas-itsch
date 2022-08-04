@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row ">
                 <div class="col">
-                    <h5>Alumnos registrados</h5>
+                    <h5>Inscripciones</h5>
                 </div>
             </div>
             <div class="row my-3">
@@ -35,28 +35,70 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Último módulo - Calificación</th>
-                    <th scope="col">Grupo</th>
+                    <th scope="col">Inscripciones</th>
+
                 </tr>
             </thead>
             <tbody>
-
                 @foreach ($listaAlumnos as $alumno)
-                    @if ($alumno->getTable() == 'alumnos')
+                    @if ($alumno['tipo'] == 'alumno')
                         <tr>
-                            <th>{{ $alumno->ID_ALUMNO }}</th>
-                            <td>{{ $alumno->ALUMNO_NOMBRE . ' ' . $alumno->ALUMNO_APELLIDO_PAT . ' ' . $alumno->ALUMNO_APELLIDO_MAT }}
-                            </td>
-                            <td></td>
-                            <td></td>
+                            <th>{{ $alumno['id'] }}</th>
+                            <td>{{ $alumno['nombre'] }}</td>
+
+                            @if ($inscribiendo['id'] == $alumno['id'])
+                                <td>
+                                    <form>
+                                        <h5 class="text-center">Inscripción a {{$inscribiendo['id']}}</h5>
+                                        <div class="form-row mb-3">
+                                            <div class="col">
+                                                <input type="text" wire:model="inscribiendo.folio"
+                                                    class="form-control" placeholder="Número de folio">
+                                            </div>
+                                        </div>
+                                        <div class="form-row mb-3">
+                                            <div class="col">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Cantidad">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            @else
+                                <td>
+                                    @foreach ($planesEstudio as $idPlan => $contenido)
+                                        @if (isset($alumno['grupos']["$idPlan"]))
+                                            {{-- Existe el grupo, entonces está inscrito a él --}}
+                                            <button type="button" class="btn btn-secondary">
+                                                {{ $contenido['idioma'] }}</button>
+                                        @elseif (isset($alumno['ultimoModulo']["$idPlan"]))
+                                            {{-- Si no está inscrito a ningún grupo, pero tiene antecedentes en el idioma --}}
+                                            <button type="button" class="btn btn-success"
+                                                wire:click="inscribir('{{ $alumno['id'] }}')">
+                                                {{ $contenido['idioma'] }}
+                                                M{{ $alumno['ultimoModulo']["$idPlan"]['modulo'] + 1 }}</button>
+                                        @else
+                                            {{-- No tiene antecedentes en el idioma --}}
+                                            <button type="button" class="btn btn-primary">
+                                                {{ $contenido['idioma'] }}</button>
+                                        @endif
+                                    @endforeach
+                                </td>
+                            @endif
+
                         </tr>
                     @else
+                        {{-- No está registrado --}}
                         <tr>
                             <th></th>
-                            <td>{{ $alumno->name . ' - ' . $alumno->email }}
-                            </td>
+                            <td>{{ $alumno->name . ' - ' . $alumno->email }}</td>
                             <td><button type="button" class="btn btn-primary">Registrar</button></td>
-                            <td></td>
+
                         </tr>
                     @endif
                 @endforeach
@@ -68,7 +110,7 @@
         <div class="container m-1">
             <div class="row">
                 <div class="col-6">
-                    {{ $listaAlumnos->links() }}
+                    {{ $alumnosPaginado->links() }}
                 </div>
 
             </div>

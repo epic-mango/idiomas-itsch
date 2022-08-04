@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\WithPagination;
+use stdClass;
 
 class Alumno extends Model
 {
@@ -43,15 +44,17 @@ class Alumno extends Model
             
 
             if (isset($ultimos[$modulo->MODULO_ID_PLANESTUDIO])) {
-                $max = $ultimos[$modulo->MODULO_ID_PLANESTUDIO];
+                $max = $ultimos[$modulo->MODULO_ID_PLANESTUDIO]['modulo'];
                 if ($actual > $max) {
-                    $ultimos[$modulo->MODULO_ID_PLANESTUDIO] = $actual;
+                    $ultimos[$modulo->MODULO_ID_PLANESTUDIO]['modulo'] = $actual;
+                    $ultimos[$modulo->MODULO_ID_PLANESTUDIO]['calificacion'] = $modulo->CARDEX_CALIFICACION;
                 }
             } else {
-                $ultimos[$modulo->MODULO_ID_PLANESTUDIO] = $actual;
+                $ultimos[$modulo->MODULO_ID_PLANESTUDIO] = [];
+                $ultimos[$modulo->MODULO_ID_PLANESTUDIO]['modulo'] = $actual;
+                $ultimos[$modulo->MODULO_ID_PLANESTUDIO]['calificacion'] = $modulo->CARDEX_CALIFICACION;
             }
         }
-
         return $ultimos;
     }
 }
