@@ -1,5 +1,4 @@
 <div>
-    <!--PARA QUE SALGA-->
     <div class="container">
         <div class="container">
             <div class="row ">
@@ -48,25 +47,81 @@
 
                             @if ($inscribiendo['id'] == $alumno['id'])
                                 <td>
+                                    {{-- Si el alumno está siendo inscrito, se mostrará este form --}}
                                     <form>
-                                        <h5 class="text-center">Inscripción a {{$inscribiendo['id']}}</h5>
+                                        <h5 class="text-center">Inscripción a {{ $inscribiendo['idioma'] }}
+                                            M{{ $inscribiendo['numeroModulo'] }}</h5>
+
+
+                                        {{-- Número de folio --}}
                                         <div class="form-row mb-3">
                                             <div class="col">
-                                                <input type="text" wire:model="inscribiendo.folio"
-                                                    class="form-control" placeholder="Número de folio">
+                                                <input type="number" wire:model="inscribiendo.folio"
+                                                    class="form-control" placeholder="Número de folio" />
+                                                @error('inscribiendo.folio')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
+                                        {{-- Cantidad --}}
                                         <div class="form-row mb-3">
                                             <div class="col">
-                                                <div class="input-group mb-3">
+                                                <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">$</span>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Cantidad">
+                                                    <input type="number" class="form-control" placeholder="Cantidad"
+                                                        wire:model="inscribiendo.cantidad" />
+
 
                                                 </div>
+                                                @error('inscribiendo.cantidad')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
+                                        {{-- Grupos --}}
+                                        <div class="form-row mb-3">
+                                            <div class="col">
+                                                <select class="custom-select" aria-placeholder="Grupo"
+                                                    wire:model="inscribiendo.idGrupo">
+                                                    <option selected hidden>Grupo</option>
+
+                                                    @foreach ($planesEstudio as $idPlan => $datosPlanEstudio)
+                                                        @if ($idPlan === $inscribiendo['planEstudio'])
+                                                            @foreach ($datosPlanEstudio['modulos'] as $idModulo => $datosModulo)
+                                                                @if (str_replace($idPlan . '_M', '', $idModulo) === $inscribiendo['numeroModulo'])
+                                                                    @foreach ($datosModulo['grupos'] as $grupo)
+                                                                        @if ($grupo['GRUPO_NUM_ALUMNOS'] < $grupo['GRUPO_LIMITE'])
+                                                                            <option value="{{ $grupo['ID_GRUPO'] }}">
+                                                                                {{ $grupo['ID_GRUPO'] }}
+                                                                                {{ $grupo['GRUPO_TIPO'] }}
+                                                                                ({{ $grupo['GRUPO_NUM_ALUMNOS'] }}/{{ $grupo['GRUPO_LIMITE'] }})
+                                                                            </option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                                @error('inscribiendo.idGrupo')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- Botones --}}
+                                        <div class="d-flex justify-content-center">
+                                            <button type="button" class="btn btn-success mx-1"
+                                                wire:click="inscribir">Inscribir</button>
+                                            <button type="button" class="btn btn-secondary mx-1"
+                                                wire:click="cancelarInscripcion">Cancelar</button>
+                                        </div>
+
+
+
+
                                     </form>
                                 </td>
                             @else
@@ -79,7 +134,7 @@
                                         @elseif (isset($alumno['ultimoModulo']["$idPlan"]))
                                             {{-- Si no está inscrito a ningún grupo, pero tiene antecedentes en el idioma --}}
                                             <button type="button" class="btn btn-success"
-                                                wire:click="inscribir('{{ $alumno['id'] }}')">
+                                                wire:click="llenarInscripcion('{{ $alumno['id'] }}','{{ $idPlan }}','{{ $alumno['ultimoModulo']["$idPlan"]['modulo'] + 1 }}')">
                                                 {{ $contenido['idioma'] }}
                                                 M{{ $alumno['ultimoModulo']["$idPlan"]['modulo'] + 1 }}</button>
                                         @else
