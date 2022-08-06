@@ -100,22 +100,25 @@ class Inscripcion extends Component
         //Verificar el cupo del grupo
         $grupo = Grupo::find($this->inscribiendo['idGrupo']);
         if ($grupo->NUM_ALUMNOS >= $grupo->GRUPO_LIMITE)
-            return;
+            return false;
 
         $alumno = Alumno::find($this->inscribiendo['id']);
-        $ultimoModulo = $alumno->lastCardex()[$this->inscribiendo['planEstudio']]['modulo'];
+
         $grupo = Grupo::find($this->inscribiendo['idGrupo']);
         $modulo = $grupo->modulo()->first();
 
         //Verificar que el alumno puede inscribirse en el módulo
-        if ($ultimoModulo == !intval(str_replace($modulo->MODULO_ID_PLANESTUDIO . '_M', '', $modulo->ID_MODULO)) - 1)
-            return;
+        if ($this->inscribiendo['numeroModulo'] > 1) {
+            $ultimoModulo = $alumno->lastCardex()[$this->inscribiendo['planEstudio']]['modulo'];
+            if ($ultimoModulo == !intval(str_replace($modulo->MODULO_ID_PLANESTUDIO . '_M', '', $modulo->ID_MODULO)) - 1)
+                return false;
+        }
 
         //Verificar que el alumno no este inscrito en el módulo
         foreach ($alumno->grupos()->get() as $grupoInscrito) {
             $planInscrito = $grupoInscrito->modulo()->first()->MODULO_ID_PLANESTUDIO;
             if ($planInscrito == $this->inscribiendo['planEstudio']) {
-                return;
+                return false;
             }
         }
 

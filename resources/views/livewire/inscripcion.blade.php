@@ -139,7 +139,8 @@
                                                 M{{ $alumno['ultimoModulo']["$idPlan"]['modulo'] + 1 }}</button>
                                         @else
                                             {{-- No tiene antecedentes en el idioma --}}
-                                            <button type="button" class="btn btn-primary">
+                                            <button type="button" class="btn btn-primary"
+                                                wire:click="llenarInscripcion('{{ $alumno['id'] }}','{{ $idPlan }}','1')">
                                                 {{ $contenido['idioma'] }}</button>
                                         @endif
                                     @endforeach

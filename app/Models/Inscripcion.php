@@ -27,6 +27,6 @@ class Inscripcion extends Model
         'P3',
         'P4',
         'PF',
-        'CALIFICACION_FECHA'
+        'CALIFICACION_FECHA',
     ];
 }
